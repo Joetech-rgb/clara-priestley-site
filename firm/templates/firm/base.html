@@ -21,8 +21,6 @@
   <style>
     html {
       scroll-behavior: smooth;
-      overflow-x: hidden;
-      overflow-y: visible;
     }
 
     html, body {
@@ -47,8 +45,6 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      overflow-x: hidden;
-      overflow-y: visible;
       color: #334155;
       background-color: #FFFFFF;
     }
@@ -372,8 +368,6 @@
         * { font-family: "Times New Roman", Times, serif !important; }
         html {
       scroll-behavior: smooth;
-      overflow-x: hidden;
-      overflow-y: visible;
     }
 
     html, body {
@@ -402,6 +396,7 @@
     </style>
 </head>
 <body>
+<div style="overflow-x: hidden; width: 100%;">
 {% if messages %}
   <div class="container mt-3">
     {% for message in messages %}
@@ -802,6 +797,7 @@ window.addEventListener('load', function () {
   }
 });
 </script>
+</div>
 </body>
 </html>
 
