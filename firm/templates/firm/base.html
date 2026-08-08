@@ -1,11 +1,11 @@
-﻿{% load static %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}Clara Priestley LLP | Legal Excellence. Trusted Advocacy.{% endblock %}</title>
-  <link rel="icon" type="image/png" href="{% static 'firm/img/image3.png' %}">
+  <link rel="icon" type="image/png" href="{% static 'firm/img/image3.png' %}?v=2">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,6 +21,13 @@
   <style>
     html {
       scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      max-width: 100%;
     }
 
     :root {
@@ -358,7 +365,16 @@
   }
 }
         * { font-family: "Times New Roman", Times, serif !important; }
-        html { scroll-behavior: smooth; }
+        html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      max-width: 100%;
+    }
         .whatsapp-float-fixed {
             position: fixed;
             bottom: 24px;
