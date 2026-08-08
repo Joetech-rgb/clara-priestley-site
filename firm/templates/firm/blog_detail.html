@@ -1,0 +1,625 @@
+﻿{% extends "firm/base.html" %}
+{% load static %}
+
+{% block title %}{{ post.title }} | Insights | Clara Priestley LLP{% endblock %}
+
+{% block extra_css %}
+<!-- Google Fonts & FontAwesome -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+<style>
+  :root {
+    --cp-navy: #0B1F3A;
+    --cp-navy-light: #162C4A;
+    --cp-gold: #C9A227;
+    --cp-gold-hover: #b08d1e;
+    --cp-slate: #5A6A80;
+    --cp-bg-light: #F4F6F9;
+    --cp-border: #E2E8F0;
+    --cp-shadow: 0 20px 40px rgba(11, 31, 58, 0.06);
+    --cp-shadow-hover: 0 25px 50px rgba(11, 31, 58, 0.12);
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    color: #2D3748;
+    background-color: var(--cp-bg-light);
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6, .font-serif {
+    font-family: 'Playfair Display', serif;
+  }
+
+  /* Sticky Navbar Styling */
+  .navbar-firm {
+    background: rgba(11, 31, 58, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(201, 162, 39, 0.2);
+    transition: all 0.3s ease;
+  }
+
+  /* Hero Section */
+  .hero-post {
+    background: linear-gradient(180deg, rgba(11, 31, 58, 0.88) 0%, rgba(11, 31, 58, 0.98) 100%),
+                url('{% if post.featured_image %}{{ post.featured_image.url }}{% else %}{% static "images/law-hero.jpg" %}{% endif %}') center/cover no-repeat fixed;
+    padding: 140px 0 100px;
+    color: #ffffff;
+    position: relative;
+  }
+
+  .breadcrumb-item + .breadcrumb-item::before {
+    color: var(--cp-gold);
+  }
+
+  .category-badge {
+    background-color: rgba(201, 162, 39, 0.15);
+    color: var(--cp-gold);
+    border: 1px solid var(--cp-gold);
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 6px 16px;
+    border-radius: 50px;
+  }
+
+  /* Main Container Card */
+  .post-card-floating {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: var(--cp-shadow);
+    padding: 3.5rem;
+    margin-top: -60px;
+    position: relative;
+    z-index: 10;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+  }
+
+  /* Dynamic Article Typography (Django post.body styling) */
+  .article-body {
+    font-size: 1.125rem;
+    line-height: 1.85;
+    color: #334155;
+  }
+
+  /* Drop Cap for first paragraph */
+  .article-body > p:first-of-type::first-letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    float: left;
+    line-height: 0.8;
+    padding-right: 14px;
+    padding-top: 4px;
+    color: var(--cp-navy);
+    font-weight: 700;
+  }
+
+  .article-body h2 {
+    font-size: 2rem;
+    color: var(--cp-navy);
+    margin-top: 2.5rem;
+    margin-bottom: 1.25rem;
+    font-weight: 700;
+  }
+
+  .article-body h3 {
+    font-size: 1.5rem;
+    color: var(--cp-navy);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+
+  .article-body p {
+    margin-bottom: 1.75rem;
+  }
+
+  .article-body ul, .article-body ol {
+    margin-bottom: 2rem;
+    padding-left: 1.5rem;
+  }
+
+  .article-body li {
+    margin-bottom: 0.75rem;
+  }
+
+  /* Blockquote & Pull Quote */
+  .article-body blockquote, .pull-quote {
+    background-color: var(--cp-bg-light);
+    border-left: 4px solid var(--cp-gold);
+    padding: 2rem;
+    border-radius: 0 16px 16px 0;
+    margin: 2.5rem 0;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.35rem;
+    color: var(--cp-navy);
+  }
+
+  .highlight-box {
+    background: rgba(201, 162, 39, 0.05);
+    border: 1px solid rgba(201, 162, 39, 0.3);
+    border-radius: 12px;
+    padding: 1.75rem;
+    margin: 2rem 0;
+  }
+
+  /* Sidebar Styling */
+  .sticky-sidebar {
+    top: 100px;
+  }
+
+  .sidebar-widget {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 1.75rem;
+    box-shadow: var(--cp-shadow);
+    border: 1px solid var(--cp-border);
+    margin-bottom: 1.75rem;
+  }
+
+  .widget-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--cp-navy);
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--cp-gold);
+    margin-bottom: 1.25rem;
+  }
+
+  .toc-link {
+    color: var(--cp-slate);
+    text-decoration: none;
+    display: block;
+    padding: 6px 0;
+    font-size: 0.95rem;
+    transition: color 0.2s ease;
+  }
+
+  .toc-link:hover {
+    color: var(--cp-gold);
+  }
+
+  /* Buttons */
+  .btn-gold {
+    background-color: var(--cp-gold);
+    color: #ffffff;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 28px;
+    transition: all 0.3s ease;
+  }
+
+  .btn-gold:hover {
+    background-color: var(--cp-gold-hover);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(201, 162, 39, 0.3);
+  }
+
+  .btn-navy {
+    background-color: var(--cp-navy);
+    color: #ffffff;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 28px;
+    transition: all 0.3s ease;
+  }
+
+  .btn-navy:hover {
+    background-color: var(--cp-navy-light);
+    color: #ffffff;
+    transform: translateY(-2px);
+  }
+
+  /* Social Share Floating Buttons */
+  .share-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--cp-bg-light);
+    color: var(--cp-navy);
+    transition: all 0.3s ease;
+    border: 1px solid var(--cp-border);
+    text-decoration: none;
+  }
+
+  .share-btn:hover {
+    background: var(--cp-gold);
+    color: #ffffff;
+    border-color: var(--cp-gold);
+    transform: translateY(-3px);
+  }
+
+  /* Related Article Cards */
+  .related-card {
+    border: none;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #ffffff;
+    box-shadow: var(--cp-shadow);
+    transition: all 0.3s ease;
+    height: 100%;
+  }
+
+  .related-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--cp-shadow-hover);
+  }
+
+  .related-card img {
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .related-card:hover img {
+    transform: scale(1.05);
+  }
+
+  /* Animation */
+  .fade-in-up {
+    animation: fadeInUp 0.8s ease forwards;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 991.98px) {
+    .post-card-floating {
+      padding: 2rem 1.5rem;
+      margin-top: -30px;
+    }
+    .hero-post {
+      padding: 100px 0 60px;
+    }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Sticky Header Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-firm py-3">
+  <div class="container">
+    <a class="navbar-brand font-serif fw-bold text-white fs-4" href="/">
+      CLARA PRIESTLEY <span style="color: var(--cp-gold);">LLP</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 fw-medium">
+        <li class="nav-item"><a class="nav-link text-white-50" href="/">Home</a></li>
+        <li class="nav-item"><a class="nav-link text-white-50" href="/about/">About Firm</a></li>
+        <li class="nav-item"><a class="nav-link text-white-50" href="/practices/">Practices</a></li>
+        <li class="nav-item"><a class="nav-link active text-white" href="/insights/">Insights</a></li>
+        <li class="nav-item"><a class="nav-link text-white-50" href="/contact/">Contact</a></li>
+      </ul>
+      <a href="{% url 'contact' %}" class="btn btn-gold btn-sm ms-lg-3">Consultation</a>
+    </div>
+  </div>
+</nav>
+
+<!-- 1. HERO SECTION -->
+<header class="hero-post text-center">
+  <div class="container fade-in-up">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="d-flex justify-content-center mb-4">
+      <ol class="breadcrumb mb-0 small text-uppercase tracking-wider">
+        <li class="breadcrumb-item"><a href="/" class="text-white-50 text-decoration-none">Home</a></li>
+        <li class="breadcrumb-item"><a href="/insights/" class="text-white-50 text-decoration-none">Insights</a></li>
+        <li class="breadcrumb-item active text-gold" aria-current="page">Article</li>
+      </ol>
+    </nav>
+
+    <!-- Category -->
+    <span class="category-badge d-inline-block mb-3">
+      {% if post.category %}{{ post.category }}{% else %}Corporate Law & M&A{% endif %}
+    </span>
+
+    <!-- Article Title -->
+    <h1 class="display-4 fw-bold font-serif mx-auto col-lg-10 mb-4 lh-sm">
+      {{ post.title }}
+    </h1>
+
+    <!-- Meta Details -->
+    <div class="d-flex flex-wrap align-items-center justify-content-center gap-4 text-white-50 small mt-2">
+      <div class="d-flex align-items-center gap-2">
+        <img src="{% if post.author.avatar %}{{ post.author.avatar.url }}{% else %}https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=150{% endif %}" alt="{{ post.author }}" class="rounded-circle" width="40" height="40" style="object-fit:cover; border:2px solid var(--cp-gold);">
+        <span class="text-white fw-semibold">{% if post.author %}{{ post.author.get_full_name|default:post.author }}{% else %}Clara Priestley, Esq.{% endif %}</span>
+      </div>
+      <div class="d-flex align-items-center gap-1">
+        <i class="bi bi-calendar3 text-gold"></i>
+        <span>{{ post.published_at|date:"F d, Y"|default:"August 6, 2026" }}</span>
+      </div>
+      <div class="d-flex align-items-center gap-1">
+        <i class="bi bi-clock text-gold"></i>
+        <span>{{ post.read_time|default:"8 min read" }}</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- MAIN CONTENT LAYOUT -->
+<div class="container pb-5">
+  <div class="row g-4">
+    
+    <!-- 2. ARTICLE CONTAINER -->
+    <main class="col-lg-8">
+      <article class="post-card-floating fade-in-up" style="max-width: 850px;">
+        
+        <!-- Render Django HTML Body -->
+        <div class="article-body">
+          {% if post.body %}
+            {{ post.body|safe }}
+          {% else %}
+            <p>Cross-border mergers and corporate acquisitions within volatile international markets demand an unprecedented level of regulatory scrutiny, structural foresight, and strategic precision. As institutions adapt to shifting compliance frameworks, legal teams must proactively navigate multifaceted risks.</p>
+
+            <h2>Regulatory Scrutiny in Global Transactions</h2>
+            <p>Antitrust authorities across North America and the European Union have heightened their focus on technology, defense, and healthcare consolidations. Corporate entities entering transactional agreements must account for prolonged clearance windows and extended regulatory discovery phases.</p>
+
+            <div class="highlight-box">
+              <h4 class="h6 font-serif fw-bold text-navy mb-2"><i class="bi bi-shield-check text-gold me-2"></i> Key Legal Takeaway</h4>
+              <p class="small text-muted mb-0">Structuring contractual break fees and defining clear 'Material Adverse Effect' clauses remain the primary legal defense against regulatory stalling.</p>
+            </div>
+
+            <div class="pull-quote">
+              "Precision in early-stage legal diligence is no longer merely risk mitigation—it is the strategic cornerstone of successful value realization."
+            </div>
+
+            <h3>Critical Diligence Checklist</h3>
+            <ul>
+              <li><strong>Cross-Border Tax Liability:</strong> Evaluating multi-jurisdictional withholding requirements and treaty protections.</li>
+              <li><strong>Intellectual Property Audits:</strong> Verifying proprietary software assignments and active trademark protections globally.</li>
+              <li><strong>ESG & Compliance Standards:</strong> Ensuring foreign subsidiaries meet stringent environmental and supply-chain governance mandates.</li>
+            </ul>
+          {% endif %}
+        </div>
+
+        <!-- 5. SHARE SECTION -->
+        <hr class="my-5" style="border-color: var(--cp-border);">
+        <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+          <span class="fw-bold text-navy font-serif">Share This Insight:</span>
+          <div class="d-flex gap-2">
+            <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ request.build_absolute_uri }}" target="_blank" class="share-btn" title="Share on LinkedIn"><i class="bi bi-linkedin"></i></a>
+            <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ post.title }}" target="_blank" class="share-btn" title="Share on X"><i class="bi bi-twitter-x"></i></a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank" class="share-btn" title="Share on Facebook"><i class="bi bi-facebook"></i></a>
+            <button onclick="navigator.clipboard.writeText(window.location.href); alert('Link copied to clipboard!');" class="share-btn" title="Copy Link"><i class="bi bi-link-45deg fs-5"></i></button>
+          </div>
+        </div>
+
+        <!-- 6. AUTHOR SECTION -->
+        <div class="bg-light rounded-4 p-4 mt-5 border d-flex flex-column flex-md-row align-items-center align-items-md-start gap-4">
+          <img src="{% if post.author.avatar %}{{ post.author.avatar.url }}{% else %}https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=300{% endif %}" alt="{{ post.author }}" class="rounded-circle shadow-sm" width="100" height="100" style="object-fit:cover;">
+          <div>
+            <div class="d-flex align-items-center justify-content-between mb-1">
+              <h3 class="h5 font-serif fw-bold text-navy mb-0">{% if post.author %}{{ post.author.get_full_name|default:post.author }}{% else %}Clara Priestley, Esq.{% endif %}</h3>
+            </div>
+            <p class="text-gold small fw-semibold text-uppercase mb-2">Senior Managing Partner | Cross-Border M&A Practice Group</p>
+            <p class="text-muted small mb-3">Clara specializes in multinational corporate law, cross-border restructuring, and international arbitration with over two decades of experience advising Fortune 500 boards.</p>
+            <div class="d-flex align-items-center gap-3">
+              <a href="#" class="text-navy me-2"><i class="bi bi-linkedin"></i></a>
+              <a href="#" class="text-navy me-2"><i class="bi bi-envelope-fill"></i></a>
+              <a href="{% url 'contact' %}" class="btn btn-navy btn-sm px-3 ms-auto">Contact Partner</a>
+            </div>
+          </div>
+        </div>
+
+      </article>
+    </main>
+
+    <!-- 3. SIDEBAR -->
+    <aside class="col-lg-4">
+      <div class="sticky-top sticky-sidebar" style="padding-top: -60px;">
+        
+        <!-- Table of Contents -->
+        <div class="sidebar-widget">
+          <h4 class="widget-title">Table of Contents</h4>
+          <nav id="toc" class="nav flex-column">
+            <a class="toc-link" href="#">1. Regulatory Scrutiny in Global Transactions</a>
+            <a class="toc-link" href="#">2. Structural Safeguards & Clauses</a>
+            <a class="toc-link" href="#">3. Critical Diligence Checklist</a>
+            <a class="toc-link" href="#">4. Conclusion & Market Outlook</a>
+          </nav>
+        </div>
+
+        <!-- Download Legal Guide CTA Card -->
+        <div class="sidebar-widget text-white" style="background: linear-gradient(135deg, var(--cp-navy) 0%, var(--cp-navy-light) 100%);">
+          <i class="bi bi-file-earmark-pdf fs-1 text-gold mb-2 d-block"></i>
+          <h4 class="h5 font-serif fw-bold mb-2">2026 M&A Regulatory Guide</h4>
+          <p class="small text-white-50 mb-3">Download our comprehensive report on navigating international corporate antitrust enforcement.</p>
+          <a href="#" class="btn btn-gold w-100 btn-sm"><i class="bi bi-download me-2"></i> Download PDF Guide</a>
+        </div>
+
+        <!-- Recent Articles -->
+        <div class="sidebar-widget">
+          <h4 class="widget-title">Recent Insights</h4>
+          <div class="d-flex flex-column gap-3">
+            <a href="#" class="text-decoration-none group">
+              <span class="text-gold extra-small text-uppercase fw-bold d-block mb-1">Litigation</span>
+              <h5 class="h6 font-serif text-navy fw-semibold mb-1 hover-gold">Navigating International Commercial Arbitration Rules</h5>
+              <span class="text-muted extra-small">July 28, 2026</span>
+            </a>
+            <hr class="my-1 text-muted opacity-25">
+            <a href="#" class="text-decoration-none">
+              <span class="text-gold extra-small text-uppercase fw-bold d-block mb-1">Tax & Assets</span>
+              <h5 class="h6 font-serif text-navy fw-semibold mb-1">Structuring Family Offices for High-Net-Worth Entities</h5>
+              <span class="text-muted extra-small">July 15, 2026</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Book Consultation Widget -->
+        <div class="sidebar-widget text-center border-gold" style="border: 1px solid var(--cp-gold);">
+          <h4 class="h5 font-serif fw-bold text-navy mb-2">Require Legal Counsel?</h4>
+          <p class="small text-muted mb-3">Schedule a confidential briefing with our senior litigation and advisory team.</p>
+          <a href="{% url 'contact' %}" class="btn btn-navy w-100">Book Consultation</a>
+        </div>
+
+      </div>
+    </aside>
+
+  </div>
+</div>
+
+<!-- 7. RELATED ARTICLES SECTION -->
+<section class="py-5 bg-white border-top">
+  <div class="container py-4">
+    <div class="d-flex justify-content-between align-items-end mb-4">
+      <div>
+        <span class="text-gold fw-bold text-uppercase small tracking-wider">Expand Your Perspective</span>
+        <h2 class="h2 font-serif fw-bold text-navy mb-0">Related Legal Insights</h2>
+      </div>
+      <a href="/insights/" class="btn btn-outline-dark rounded-3 px-4 d-none d-md-inline-block">View All Articles</a>
+    </div>
+
+    <div class="row g-4">
+      {% if related_posts %}
+        {% for rel_post in related_posts|slice:":3" %}
+        <div class="col-md-4">
+          <div class="card related-card">
+            <img src="{% if rel_post.featured_image %}{{ rel_post.featured_image.url }}{% else %}https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&q=80&w=600{% endif %}" class="card-img-top" alt="{{ rel_post.title }}">
+            <div class="card-body p-4">
+              <span class="text-gold small fw-bold text-uppercase d-block mb-2">{{ rel_post.category|default:"Corporate" }}</span>
+              <h3 class="h5 font-serif fw-bold text-navy mb-2">{{ rel_post.title }}</h3>
+              <p class="text-muted small mb-3">{{ rel_post.summary|truncatewords:15 }}</p>
+              <div class="d-flex justify-content-between align-items-center pt-2 border-top">
+                <span class="text-muted extra-small">{{ rel_post.published_at|date:"M d, Y" }}</span>
+                <a href="{{ rel_post.get_absolute_url }}" class="text-navy fw-semibold small text-decoration-none">Read More &rarr;</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      {% else %}
+        <!-- Default Related Cards -->
+        <div class="col-md-4">
+          <div class="card related-card">
+            <img src="https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&q=80&w=600" class="card-img-top" alt="Article Image">
+            <div class="card-body p-4">
+              <span class="text-gold small fw-bold text-uppercase d-block mb-2">Corporate Advisory</span>
+              <h3 class="h5 font-serif fw-bold text-navy mb-2">Cross-Border Mergers in Volatile Tech Sector</h3>
+              <p class="text-muted small mb-3">Key frameworks for technology acquirers managing multi-jurisdiction regulatory reviews.</p>
+              <div class="d-flex justify-content-between align-items-center pt-2 border-top">
+                <span class="text-muted extra-small">August 02, 2026</span>
+                <a href="#" class="text-navy fw-semibold small text-decoration-none">Read Article &rarr;</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card related-card">
+            <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80&w=600" class="card-img-top" alt="Article Image">
+            <div class="card-body p-4">
+              <span class="text-gold small fw-bold text-uppercase d-block mb-2">Litigation</span>
+              <h3 class="h5 font-serif fw-bold text-navy mb-2">Enforcing Institutional Arbitration Awards</h3>
+              <p class="text-muted small mb-3">A practical overview of international treaty protections for asset recovery.</p>
+              <div class="d-flex justify-content-between align-items-center pt-2 border-top">
+                <span class="text-muted extra-small">July 29, 2026</span>
+                <a href="#" class="text-navy fw-semibold small text-decoration-none">Read Article &rarr;</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card related-card">
+            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=600" class="card-img-top" alt="Article Image">
+            <div class="card-body p-4">
+              <span class="text-gold small fw-bold text-uppercase d-block mb-2">Banking & Finance</span>
+              <h3 class="h5 font-serif fw-bold text-navy mb-2">Navigating Sovereign Debt Restructuring</h3>
+              <p class="text-muted small mb-3">Legal mechanisms for creditor committees negotiating sovereign yield defaults.</p>
+              <div class="d-flex justify-content-between align-items-center pt-2 border-top">
+                <span class="text-muted extra-small">July 20, 2026</span>
+                <a href="#" class="text-navy fw-semibold small text-decoration-none">Read Article &rarr;</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<!-- 8. CONSULTATION CTA -->
+<section class="py-5 text-white" style="background: linear-gradient(135deg, #0B1F3A 0%, #162C4A 100%);">
+  <div class="container py-4 text-center">
+    <span class="text-gold fw-bold text-uppercase tracking-wider small d-block mb-2">Direct Partner Legal Access</span>
+    <h2 class="display-5 font-serif fw-bold mb-3">Need Legal Advice?</h2>
+    <p class="lead text-white-50 col-lg-6 mx-auto mb-4">Speak with Clara Priestley LLP today for a confidential evaluation of your corporate, litigation, or regulatory matters.</p>
+    <a href="{% url 'contact' %}" class="btn btn-gold btn-lg px-5 font-serif">Schedule Consultation</a>
+  </div>
+</section>
+
+<!-- 9. FOOTER -->
+<footer class="bg-navy text-white pt-5 pb-4" style="background-color: #071324; border-top: 1px solid rgba(201,162,39,0.2);">
+  <div class="container">
+    <div class="row g-4 pb-4">
+      <div class="col-lg-4">
+        <h3 class="h4 font-serif fw-bold text-white mb-3">CLARA PRIESTLEY <span class="text-gold">LLP</span></h3>
+        <p class="small text-white-50 mb-3">A international law practice delivering high-stakes corporate advocacy, transactional legal counsel, and strategic litigation services worldwide.</p>
+        <div class="d-flex gap-3">
+          <a href="#" class="text-white-50 hover-gold"><i class="bi bi-linkedin fs-5"></i></a>
+          <a href="#" class="text-white-50 hover-gold"><i class="bi bi-twitter-x fs-5"></i></a>
+          <a href="#" class="text-white-50 hover-gold"><i class="bi bi-facebook fs-5"></i></a>
+        </div>
+      </div>
+      
+      <div class="col-6 col-lg-2">
+        <h4 class="h6 font-serif fw-bold text-gold text-uppercase mb-3">Practice Areas</h4>
+        <ul class="list-unstyled small d-flex flex-column gap-2 text-white-50">
+          <li><a href="#" class="text-white-50 text-decoration-none">Corporate & M&A</a></li>
+          <li><a href="#" class="text-white-50 text-decoration-none">Commercial Litigation</a></li>
+          <li><a href="#" class="text-white-50 text-decoration-none">Banking & Finance</a></li>
+          <li><a href="#" class="text-white-50 text-decoration-none">Regulatory Compliance</a></li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-lg-2">
+        <h4 class="h6 font-serif fw-bold text-gold text-uppercase mb-3">Company</h4>
+        <ul class="list-unstyled small d-flex flex-column gap-2 text-white-50">
+          <li><a href="/about/" class="text-white-50 text-decoration-none">About Firm</a></li>
+          <li><a href="/partners/" class="text-white-50 text-decoration-none">Partners</a></li>
+          <li><a href="/insights/" class="text-white-50 text-decoration-none">Legal Insights</a></li>
+          <li><a href="/careers/" class="text-white-50 text-decoration-none">Careers</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-4">
+        <h4 class="h6 font-serif fw-bold text-gold text-uppercase mb-3">Global Headquarters</h4>
+        <p class="small text-white-50 mb-1"><i class="bi bi-geo-alt text-gold me-2"></i> 100 Financial Center Blvd, Suite 4200</p>
+        <p class="small text-white-50 mb-1"><i class="bi bi-telephone text-gold me-2"></i> +1 (800) 555-PRIESTLEY</p>
+        <p class="small text-white-50 mb-0"><i class="bi bi-envelope text-gold me-2"></i> contact@clarapriestley.com</p>
+      </div>
+    </div>
+
+    <hr style="border-color: rgba(255,255,255,0.1);">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center small text-white-50 pt-2">
+      <p class="mb-0">&copy; {% now "Y" %} Clara Priestley LLP. All Rights Reserved. Attorney Advertising.</p>
+      <div class="d-flex gap-3 mt-2 mt-md-0">
+        <a href="#" class="text-white-50 text-decoration-none">Privacy Policy</a>
+        <a href="#" class="text-white-50 text-decoration-none">Terms of Service</a>
+        <a href="#" class="text-white-50 text-decoration-none">Disclaimer</a>
+      </div>
+    </div>
+  </div>
+</footer>
+{% endblock %}

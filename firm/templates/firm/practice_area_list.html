@@ -1,0 +1,204 @@
+﻿{% extends "firm/base.html" %}
+{% load static %}
+
+{% block title %}Practice Areas | Clara Priestley LLP{% endblock %}
+
+{% block extra_css %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+<style>
+  :root {
+    --cp-navy: #0B1F3A;
+    --cp-navy-light: #162C4A;
+    --cp-gold: #C9A227;
+    --cp-gold-hover: #b08d1e;
+    --cp-slate: #5A6A80;
+    --cp-bg-light: #F4F6F9;
+    --cp-border: #E2E8F0;
+    --cp-shadow: 0 20px 40px rgba(11, 31, 58, 0.06);
+    --cp-shadow-hover: 0 25px 50px rgba(11, 31, 58, 0.12);
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    color: #2D3748;
+    background-color: var(--cp-bg-light);
+  }
+
+  h1, h2, h3, h4, h5, h6, .font-serif {
+    font-family: 'Playfair Display', serif;
+  }
+
+  .hero-practice {
+    background: linear-gradient(180deg, rgba(11, 31, 58, 0.85) 0%, rgba(11, 31, 58, 0.98) 100%),
+                url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80&w=1600') center/cover no-repeat fixed;
+    padding: 140px 0 90px;
+    color: #ffffff;
+    position: relative;
+  }
+
+  .breadcrumb-item + .breadcrumb-item::before {
+    color: var(--cp-gold);
+  }
+
+  .practice-tile {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: var(--cp-shadow);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+  }
+
+  .practice-tile:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--cp-shadow-hover);
+    color: inherit;
+  }
+
+  .practice-tile-img-wrap {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+  }
+
+  .practice-tile-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .practice-tile:hover .practice-tile-img-wrap img {
+    transform: scale(1.06);
+  }
+
+  .practice-tile-number {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: var(--cp-gold);
+    color: #fff;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 4px 12px;
+    border-radius: 6px;
+    letter-spacing: 0.5px;
+  }
+
+  .practice-tile-body {
+    padding: 1.75rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .practice-tile-body h3 {
+    color: var(--cp-navy);
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+  }
+
+  .practice-tile-body p {
+    color: var(--cp-slate);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+    flex: 1;
+  }
+
+  .practice-tile-link {
+    color: var(--cp-gold);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .practice-tile:hover .practice-tile-link {
+    color: var(--cp-gold-hover);
+  }
+
+  .btn-gold {
+    background-color: var(--cp-gold);
+    color: #ffffff;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 28px;
+    transition: all 0.3s ease;
+  }
+
+  .btn-gold:hover {
+    background-color: var(--cp-gold-hover);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(201, 162, 39, 0.3);
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- HERO SECTION -->
+<header class="hero-practice text-center">
+  <div class="container">
+    <nav aria-label="breadcrumb" class="d-flex justify-content-center mb-3">
+      <ol class="breadcrumb mb-0 small text-uppercase tracking-wider">
+        <li class="breadcrumb-item"><a href="/" class="text-white-50 text-decoration-none">Home</a></li>
+        <li class="breadcrumb-item active text-gold" aria-current="page">Practice Areas</li>
+      </ol>
+    </nav>
+
+    <span class="text-gold fw-bold text-uppercase tracking-wider small d-block mb-2">What We Do</span>
+    <h1 class="display-3 fw-bold font-serif mx-auto col-lg-10 mb-3">Practice Areas</h1>
+    <p class="lead text-white-50 mx-auto col-lg-8 mb-0">
+      Focused legal expertise across the matters that matter most to your business and your life.
+    </p>
+  </div>
+</header>
+
+<!-- PRACTICE AREA GRID -->
+<div class="container py-5">
+  <div class="row g-4">
+    {% for area in practice_areas %}
+      <div class="col-md-6 col-lg-4">
+        <a class="practice-tile" href="{{ area.get_absolute_url }}">
+          <div class="practice-tile-img-wrap">
+            <span class="practice-tile-number">{{ forloop.counter|stringformat:"02d" }}</span>
+            <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&q=80&w=800&sig={{ forloop.counter }}" alt="{{ area.name }}">
+          </div>
+          <div class="practice-tile-body">
+            <h3>{{ area.name }}</h3>
+            <p>{{ area.summary }}</p>
+            <span class="practice-tile-link">Learn More <i class="bi bi-arrow-right ms-1"></i></span>
+          </div>
+        </a>
+      </div>
+    {% empty %}
+      <div class="col-12 text-center py-5">
+        <p class="text-muted">Practice areas coming soon.</p>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- CONSULTATION CTA -->
+<section class="py-5 text-white" style="background: linear-gradient(135deg, #0B1F3A 0%, #162C4A 100%);">
+  <div class="container py-4 text-center">
+    <span class="text-gold fw-bold text-uppercase tracking-wider small d-block mb-2">Direct Partner Counsel</span>
+    <h2 class="display-5 font-serif fw-bold mb-3">Not Sure Which Area Fits Your Situation?</h2>
+    <p class="lead text-white-50 col-lg-6 mx-auto mb-4">Reach out and we'll point you to the right attorney for a confidential consultation.</p>
+    <a href="{% url 'firm:contact' %}" class="btn btn-gold btn-lg px-5 font-serif">Book a Consultation</a>
+  </div>
+</section>
+{% endblock %}

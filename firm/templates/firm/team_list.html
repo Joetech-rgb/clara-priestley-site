@@ -1,0 +1,174 @@
+﻿{% extends "firm/base.html" %}
+{% load static %}
+
+{% block title %}Our Team | Clara Priestley LLP{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+<style>
+  :root {
+    --cp-navy: #0B1F3A;
+    --cp-navy-light: #162C4A;
+    --cp-gold: #C9A227;
+    --cp-slate: #5A6A80;
+    --cp-bg-light: #F4F6F9;
+    --cp-border: #E2E8F0;
+    --cp-shadow: 0 20px 40px rgba(11, 31, 58, 0.06);
+    --cp-shadow-hover: 0 25px 50px rgba(11, 31, 58, 0.12);
+  }
+  body { background-color: var(--cp-bg-light); }
+  .hero-team {
+    background: linear-gradient(135deg, var(--cp-navy) 0%, var(--cp-navy-light) 100%);
+    padding: 80px 0 60px;
+    color: #ffffff;
+    text-align: center;
+  }
+  .placeholder-banner {
+    background: #FFF8E1;
+    border: 1px solid #F0D98C;
+    color: #6B5A1A;
+    border-radius: 10px;
+    padding: 14px 20px;
+    font-size: 0.9rem;
+    margin-top: -50px;
+    margin-bottom: 2.5rem;
+    position: relative;
+    z-index: 10;
+  }
+  .attorney-tile {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: var(--cp-shadow);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    padding: 2rem;
+    height: 100%;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+  .attorney-tile:hover { transform: translateY(-6px); box-shadow: var(--cp-shadow-hover); }
+  .avatar-circle {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    margin: 0 auto 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.75rem;
+    color: #ffffff;
+  }
+  .attorney-name { color: var(--cp-navy); font-weight: 700; margin-bottom: 0.2rem; }
+  .attorney-title {
+    color: var(--cp-gold);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .attorney-quote {
+    font-style: italic;
+    color: var(--cp-slate);
+    font-size: 0.92rem;
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+    border-left: 3px solid var(--cp-gold);
+    padding-left: 12px;
+    text-align: left;
+  }
+  .attorney-email { font-size: 0.85rem; color: var(--cp-slate); word-break: break-word; }
+  .attorney-email a { color: var(--cp-navy); text-decoration: none; font-weight: 600; }
+  .card-photo { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 25%; border-radius: 10px; margin-bottom: 1rem; }
+</style>
+{% endblock %}
+
+{% block content %}
+<header class="hero-team">
+  <div class="container">
+    <h1>Our Team</h1>
+    <p>Dedicated attorneys committed to protecting your interests with integrity and precision.</p>
+  </div>
+</header>
+
+<div class="container">
+  {% if not attorneys %}
+
+  {% endif %}
+
+  <div class="row g-4 pb-5">
+    {% for attorney in attorneys %}
+      <div class="col-md-6 col-lg-4">
+        <a class="attorney-tile d-block text-decoration-none" href="{{ attorney.get_absolute_url }}">
+          {% if attorney.photo %}
+            <img class="card-photo" src="{{ attorney.photo.url }}" alt="{{ attorney.name }}">
+          {% else %}
+            <div class="avatar-circle" style="background: var(--cp-navy);">{{ attorney.name|slice:":1" }}</div>
+          {% endif %}
+          <h3 class="attorney-name h5">{{ attorney.name }}</h3>
+          <span class="attorney-title">{{ attorney.title }}</span>
+          <div class="attorney-email">Email: <a href="mailto:{{ attorney.email|default:'pristleyclara65@gmail.com' }}">{{ attorney.email|default:"pristleyclara65@gmail.com" }}</a></div>
+        </a>
+      </div>
+    {% empty %}
+      <div class="col-md-6 col-lg-4">
+        <div class="attorney-tile">
+          <img class="card-photo" src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=400" alt="Clara Priestley">
+          <h3 class="attorney-name h5">Clara Priestley</h3>
+          <span class="attorney-title">Senior Partner - Corporate and Commercial Law</span>
+          <p class="attorney-quote">We build agreements that hold up long after the handshake.</p>
+          <div class="attorney-email">Email: <a href="mailto:pristleyclara65@gmail.com">pristleyclara65@gmail.com</a></div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="attorney-tile">
+          <img class="card-photo" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=400" alt="Marcus Whitfield">
+          <h3 class="attorney-name h5">Marcus Whitfield</h3>
+          <span class="attorney-title">Partner - Litigation and Dispute Resolution</span>
+          <p class="attorney-quote">Preparation wins more cases than eloquence ever will.</p>
+          <div class="attorney-email">Email: <a href="mailto:pristleyclara65@gmail.com">pristleyclara65@gmail.com</a></div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="attorney-tile">
+          <img class="card-photo" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=400" alt="Naomi Rosenblum">
+          <h3 class="attorney-name h5">Naomi Rosenblum</h3>
+          <span class="attorney-title">Partner - Regulatory and Compliance</span>
+          <p class="attorney-quote">Compliance is how you protect what you have built.</p>
+          <div class="attorney-email">Email: <a href="mailto:pristleyclara65@gmail.com">pristleyclara65@gmail.com</a></div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="attorney-tile">
+          <img class="card-photo" src="https://images.unsplash.com/photo-1552058544-f2b08422138a?auto=format&fit=crop&q=80&w=400" alt="David Osei">
+          <h3 class="attorney-name h5">David Osei</h3>
+          <span class="attorney-title">Associate - Real Estate Law</span>
+          <p class="attorney-quote">Every clause matters when it is someone home or livelihood.</p>
+          <div class="attorney-email">Email: <a href="mailto:pristleyclara65@gmail.com">pristleyclara65@gmail.com</a></div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="attorney-tile">
+          <img class="card-photo" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400" alt="Chiamaka Nwosu">
+          <h3 class="attorney-name h5">Chiamaka Nwosu</h3>
+          <span class="attorney-title">Associate - Employment Law</span>
+          <p class="attorney-quote">Fair workplaces start with clear expectations on both sides.</p>
+          <div class="attorney-email">Email: <a href="mailto:pristleyclara65@gmail.com">pristleyclara65@gmail.com</a></div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="attorney-tile">
+          <img class="card-photo" src="https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?auto=format&fit=crop&q=80&w=400" alt="Samuel Kessler">
+          <h3 class="attorney-name h5">Samuel Kessler</h3>
+          <span class="attorney-title">Associate - Intellectual Property</span>
+          <p class="attorney-quote">Your ideas deserve the same protection as your assets.</p>
+          <div class="attorney-email">Email: <a href="mailto:pristleyclara65@gmail.com">pristleyclara65@gmail.com</a></div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
+
+

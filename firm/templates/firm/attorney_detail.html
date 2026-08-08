@@ -1,0 +1,315 @@
+﻿{% extends "firm/base.html" %}
+{% load static %}
+
+{% block title %}{{ attorney.name }} | Clara Priestley LLP{% endblock %}
+
+{% block extra_css %}
+<!-- Google Fonts & FontAwesome / Icons -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+<style>
+  :root {
+    --cp-navy: #0B1F3A;
+    --cp-navy-light: #162C4A;
+    --cp-gold: #C9A227;
+    --cp-gold-hover: #b08d1e;
+    --cp-slate: #5A6A80;
+    --cp-bg-light: #F4F6F9;
+    --cp-border: #E2E8F0;
+    --cp-shadow: 0 20px 40px rgba(11, 31, 58, 0.06);
+    --cp-shadow-hover: 0 25px 50px rgba(11, 31, 58, 0.12);
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    color: #2D3748;
+    background-color: var(--cp-bg-light);
+  }
+
+  h1, h2, h3, h4, h5, h6, .font-serif {
+    font-family: 'Playfair Display', serif;
+  }
+
+  /* Hero Section */
+  .hero-attorney {
+    background: linear-gradient(180deg, rgba(11, 31, 58, 0.88) 0%, rgba(11, 31, 58, 0.98) 100%),
+                url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1600') center/cover no-repeat fixed;
+    padding: 140px 0 90px;
+    color: #ffffff;
+    text-align: center;
+  }
+
+  .breadcrumb-item + .breadcrumb-item::before {
+    color: var(--cp-gold);
+  }
+
+  /* Floating Card Layout */
+  .attorney-card-floating {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: var(--cp-shadow);
+    padding: 3.5rem;
+    margin-top: -50px;
+    position: relative;
+    z-index: 10;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+  }
+
+  /* Photo Container */
+  .attorney-photo-wrapper {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--cp-shadow);
+    border: 2px solid var(--cp-border);
+  }
+
+  .attorney-photo {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: center 25%;
+    transition: transform 0.4s ease;
+  }
+
+  .attorney-photo-wrapper:hover .attorney-photo {
+    transform: scale(1.03);
+  }
+
+  .attorney-photo-placeholder {
+    width: 100%;
+    aspect-ratio: 1 / 1.1;
+    border-radius: 12px;
+    background: var(--cp-bg-light);
+    border: 1px solid var(--cp-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--cp-slate);
+    font-size: 4rem;
+  }
+
+  /* Typography & Titles */
+  .attorney-title {
+    color: var(--cp-gold);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    display: inline-block;
+  }
+
+  .attorney-bio {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: #334155;
+  }
+
+  /* Contact Items */
+  .contact-info-card {
+    background: var(--cp-bg-light);
+    border: 1px solid var(--cp-border);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+
+  .contact-info-item {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .contact-info-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .contact-info-item i {
+    color: var(--cp-gold);
+    font-size: 1.25rem;
+  }
+
+  .contact-info-item a, .contact-info-item span {
+    color: var(--cp-navy);
+    font-weight: 500;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.2s ease;
+  }
+
+  .contact-info-item a:hover {
+    color: var(--cp-gold);
+  }
+
+  /* Practice Area Pills */
+  .practice-pill {
+    display: inline-block;
+    background: var(--cp-bg-light);
+    border: 1px solid var(--cp-border);
+    border-left: 3px solid var(--cp-gold);
+    color: var(--cp-navy);
+    font-weight: 600;
+    font-size: 0.88rem;
+    padding: 8px 16px;
+    border-radius: 6px;
+    margin: 0 8px 10px 0;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .practice-pill:hover {
+    background: var(--cp-navy);
+    color: #ffffff;
+    border-left-color: var(--cp-gold);
+    transform: translateY(-2px);
+  }
+
+  /* Buttons */
+  .btn-gold {
+    background-color: var(--cp-gold);
+    color: #ffffff;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 28px;
+    transition: all 0.3s ease;
+  }
+
+  .btn-gold:hover {
+    background-color: var(--cp-gold-hover);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(201, 162, 39, 0.3);
+  }
+
+  @media (max-width: 991.98px) {
+    .attorney-card-floating {
+      padding: 2rem 1.5rem;
+      margin-top: -30px;
+    }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- HERO SECTION -->
+<header class="hero-attorney">
+  <div class="container">
+    <nav aria-label="breadcrumb" class="d-flex justify-content-center mb-3">
+      <ol class="breadcrumb mb-0 small text-uppercase tracking-wider justify-content-center">
+        <li class="breadcrumb-item"><a href="/" class="text-white-50 text-decoration-none">Home</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'firm:team_list' %}" class="text-white-50 text-decoration-none">Our Team</a></li>
+        <li class="breadcrumb-item active text-gold" aria-current="page">{{ attorney.name }}</li>
+      </ol>
+    </nav>
+    <h1 class="display-3 fw-bold font-serif mb-0">{{ attorney.name }}</h1>
+  </div>
+</header>
+
+<!-- ATTORNEY DETAILS CONTAINER -->
+<div class="container pb-5">
+  <div class="attorney-card-floating">
+    <div class="row g-5">
+
+      <!-- LEFT SIDEBAR: PHOTO & DIRECT CONTACT -->
+      <div class="col-lg-4">
+        <div class="mb-4">
+          {% if attorney.photo %}
+            <div class="attorney-photo-wrapper">
+              <img class="attorney-photo" src="{{ attorney.photo.url }}" alt="{{ attorney.name }}">
+            </div>
+          {% else %}
+            <div class="attorney-photo-placeholder">
+              <i class="bi bi-person-fill"></i>
+            </div>
+          {% endif %}
+        </div>
+
+        <!-- Contact Box -->
+        <div class="contact-info-card mb-4">
+          <h4 class="h6 font-serif fw-bold text-navy mb-3 pb-2 border-bottom">Direct Communications</h4>
+          
+          {% if attorney.email %}
+            <div class="contact-info-item">
+              <i class="bi bi-envelope-fill"></i>
+              <a href="mailto:{{ attorney.email }}">{{ attorney.email }}</a>
+            </div>
+          {% endif %}
+
+          {% if attorney.phone %}
+            <div class="contact-info-item">
+              <i class="bi bi-telephone-fill"></i>
+              <a href="tel:{{ attorney.phone }}">{{ attorney.phone }}</a>
+            </div>
+          {% endif %}
+
+          {% if attorney.linkedin %}
+            <div class="contact-info-item">
+              <i class="bi bi-linkedin"></i>
+              <a href="{{ attorney.linkedin }}" target="_blank" rel="noopener">LinkedIn Profile</a>
+            </div>
+          {% endif %}
+        </div>
+
+        <a href="{% url 'firm:contact' %}" class="btn btn-gold w-100 text-uppercase font-serif shadow-sm">Book Consultation</a>
+      </div>
+
+      <!-- RIGHT MAIN CONTENT: TITLE, BIO & PRACTICE AREAS -->
+      <div class="col-lg-8">
+        <span class="attorney-title">{{ attorney.title }}</span>
+        <h2 class="h1 font-serif fw-bold text-navy mb-4">Biography & Legal Representation</h2>
+
+        <div class="attorney-bio mb-5">
+          {{ attorney.bio|linebreaks }}
+        </div>
+
+        <!-- Practice Areas Matrix -->
+        {% if attorney.practice_areas.all %}
+          <div class="pt-4 border-top">
+            <h3 class="h5 font-serif fw-bold text-navy mb-3"><i class="bi bi-briefcase text-gold me-2"></i> Specialized Practice Groups</h3>
+            <div class="d-flex flex-wrap">
+              {% for area in attorney.practice_areas.all %}
+                <a href="{{ area.get_absolute_url }}" class="practice-pill">{{ area.name }}</a>
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+
+        <!-- Admissions & Credentials (Optional Django Model Fields) -->
+        {% if attorney.education or attorney.bar_admissions %}
+          <div class="row g-4 pt-4 mt-2 border-top">
+            {% if attorney.education %}
+              <div class="col-md-6">
+                <h4 class="h6 font-serif fw-bold text-navy mb-2"><i class="bi bi-mortarboard text-gold me-2"></i> Education</h4>
+                <p class="small text-muted mb-0">{{ attorney.education|linebreaksbr }}</p>
+              </div>
+            {% endif %}
+
+            {% if attorney.bar_admissions %}
+              <div class="col-md-6">
+                <h4 class="h6 font-serif fw-bold text-navy mb-2"><i class="bi bi-shield-check text-gold me-2"></i> Bar Admissions</h4>
+                <p class="small text-muted mb-0">{{ attorney.bar_admissions|linebreaksbr }}</p>
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER CTA BANNER -->
+<section class="py-5 text-white" style="background: linear-gradient(135deg, #0B1F3A 0%, #162C4A 100%);">
+  <div class="container py-3 text-center">
+    <h2 class="display-6 font-serif fw-bold mb-3">Require Confidential Legal Counsel?</h2>
+    <p class="lead text-white-50 col-lg-6 mx-auto mb-4">Schedule a formal briefing with {{ attorney.name }} or senior partners in our practice team.</p>
+    <a href="{% url 'firm:contact' %}" class="btn btn-gold btn-lg px-5 font-serif">Schedule Briefing</a>
+  </div>
+</section>
+{% endblock %}

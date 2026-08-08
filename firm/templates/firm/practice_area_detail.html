@@ -1,0 +1,282 @@
+{% extends "firm/base.html" %}
+{% load static %}
+
+{% block title %}{{ practice_area.name }} | Practice Areas | Clara Priestley LLP{% endblock %}
+
+{% block extra_css %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+<style>
+  :root {
+    --cp-navy: #0B1F3A;
+    --cp-navy-light: #162C4A;
+    --cp-gold: #C9A227;
+    --cp-gold-hover: #b08d1e;
+    --cp-slate: #5A6A80;
+    --cp-bg-light: #F4F6F9;
+    --cp-border: #E2E8F0;
+    --cp-shadow: 0 20px 40px rgba(11, 31, 58, 0.06);
+    --cp-shadow-hover: 0 25px 50px rgba(11, 31, 58, 0.12);
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    color: #2D3748;
+    background-color: var(--cp-bg-light);
+  }
+
+  h1, h2, h3, h4, h5, h6, .font-serif {
+    font-family: 'Playfair Display', serif;
+  }
+
+  .hero-practice {
+    background: linear-gradient(180deg, rgba(11, 31, 58, 0.85) 0%, rgba(11, 31, 58, 0.98) 100%),
+                url('{% if practice_area.hero_image %}{{ practice_area.hero_image.url }}{% else %}https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1600{% endif %}') center/cover no-repeat fixed;
+    padding: 140px 0 90px;
+    color: #ffffff;
+    position: relative;
+  }
+
+  .breadcrumb-item + .breadcrumb-item::before {
+    color: var(--cp-gold);
+  }
+
+  .practice-card-floating {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: var(--cp-shadow);
+    padding: 3.5rem;
+    margin-top: -50px;
+    position: relative;
+    z-index: 10;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+  }
+
+  .capability-box {
+    background: #ffffff;
+    border: 1px solid var(--cp-border);
+    border-top: 3px solid var(--cp-gold);
+    border-radius: 12px;
+    padding: 1.75rem;
+    transition: all 0.3s ease;
+    height: 100%;
+  }
+
+  .capability-box:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--cp-shadow-hover);
+  }
+
+  .sidebar-widget {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 1.75rem;
+    box-shadow: var(--cp-shadow);
+    border: 1px solid var(--cp-border);
+    margin-bottom: 1.75rem;
+  }
+
+  .widget-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--cp-navy);
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--cp-gold);
+    margin-bottom: 1.25rem;
+  }
+
+  .btn-gold {
+    background-color: var(--cp-gold);
+    color: #ffffff;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 28px;
+    transition: all 0.3s ease;
+  }
+
+  .btn-gold:hover {
+    background-color: var(--cp-gold-hover);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(201, 162, 39, 0.3);
+  }
+
+  .btn-navy {
+    background-color: var(--cp-navy);
+    color: #ffffff;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 28px;
+    transition: all 0.3s ease;
+  }
+
+  .btn-navy:hover {
+    background-color: var(--cp-navy-light);
+    color: #ffffff;
+  }
+
+  .practice-description {
+    font-size: 1.125rem;
+    line-height: 1.85;
+    color: #334155;
+  }
+
+  .practice-description h2 {
+    font-size: 1.85rem;
+    color: var(--cp-navy);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+
+  .practice-description p {
+    margin-bottom: 1.5rem;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- HERO SECTION -->
+<header class="hero-practice text-center">
+  <div class="container">
+    <nav aria-label="breadcrumb" class="d-flex justify-content-center mb-3">
+      <ol class="breadcrumb mb-0 small text-uppercase tracking-wider">
+        <li class="breadcrumb-item"><a href="/" class="text-white-50 text-decoration-none">Home</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'firm:practice_area_list' %}" class="text-white-50 text-decoration-none">Practice Areas</a></li>
+        <li class="breadcrumb-item active text-gold" aria-current="page">{{ practice_area.name }}</li>
+      </ol>
+    </nav>
+
+    <h1 class="display-3 fw-bold font-serif mx-auto col-lg-10 mb-3">
+      {{ practice_area.name }}
+    </h1>
+    <p class="lead text-white-50 mx-auto col-lg-8 mb-0">
+      {{ practice_area.summary|default:"Strategic legal counsel engineered to navigate complex regulatory environments and protect client interests." }}
+    </p>
+  </div>
+</header>
+
+<!-- MAIN CONTENT -->
+<div class="container pb-5">
+  <div class="row g-4">
+
+    <!-- LEFT: MAIN PRACTICE DETAILS -->
+    <main class="col-lg-8">
+      <div class="practice-card-floating">
+
+        <!-- Practice Image Banner -->
+        <div class="mb-4 overflow-hidden rounded-3">
+          <img src="{% if practice_area.image %}{{ practice_area.image.url }}{% else %}https://images.unsplash.com/photo-1436450412740-6b988f486c6b?auto=format&fit=crop&q=80&w=1200{% endif %}" alt="{{ practice_area.name }}" class="img-fluid w-100" style="max-height: 380px; object-fit: cover;">
+        </div>
+
+        <!-- Description / Dynamic Body Content -->
+        <div class="practice-description mb-5">
+          {% if practice_area.description %}
+            {{ practice_area.description|safe }}
+          {% else %}
+            <h2>Overview & Strategic Approach</h2>
+            <p>Our {{ practice_area.name }} team advises corporate entities, institutional investors, and private clients on high-stakes transactions, compliance frameworks, and dispute resolution. We combine technical legal expertise with deep commercial understanding to deliver clear, actionable legal advice.</p>
+
+            <p>Whether navigating multifaceted regulatory clearances or structuring cross-border operations, our attorneys develop customized roadmaps designed to mitigate liability while maximizing operational advantage.</p>
+          {% endif %}
+        </div>
+
+        <!-- Key Capabilities Grid -->
+        <h2 class="h3 font-serif fw-bold text-navy mb-4">Core Focus Areas</h2>
+        <div class="row g-3 mb-5">
+          <div class="col-md-6">
+            <div class="capability-box">
+              <i class="bi bi-shield-check fs-3 text-gold mb-2 d-block"></i>
+              <h3 class="h6 font-serif fw-bold text-navy mb-1">Regulatory & Compliance</h3>
+              <p class="small text-muted mb-0">Proactive oversight to ensure operations remain compliant with local and international statutory mandates.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="capability-box">
+              <i class="bi bi-briefcase fs-3 text-gold mb-2 d-block"></i>
+              <h3 class="h6 font-serif fw-bold text-navy mb-1">Transactional Structuring</h3>
+              <p class="small text-muted mb-0">Contract drafting, negotiations, and strategic risk assessment for commercial entities.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="capability-box">
+              <i class="bi bi-graph-up-arrow fs-3 text-gold mb-2 d-block"></i>
+              <h3 class="h6 font-serif fw-bold text-navy mb-1">Dispute & Crisis Resolution</h3>
+              <p class="small text-muted mb-0">Relentless representation in arbitration, high-court proceedings, and settlement negotiations.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="capability-box">
+              <i class="bi bi-building-gear fs-3 text-gold mb-2 d-block"></i>
+              <h3 class="h6 font-serif fw-bold text-navy mb-1">Institutional Governance</h3>
+              <p class="small text-muted mb-0">Advising boards and executive leadership on governance, risk mitigation, and fiduciary duty.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- RIGHT: SIDEBAR -->
+    <aside class="col-lg-4">
+      <div class="sticky-top" style="top: 100px;">
+
+        <!-- Book Consultation Widget -->
+        <div class="sidebar-widget text-center border-gold" style="border: 1px solid var(--cp-gold);">
+          <i class="bi bi-journal-bookmark-fill fs-1 text-gold mb-2 d-block"></i>
+          <h4 class="h5 font-serif fw-bold text-navy mb-2">Discuss Your Matter</h4>
+          <p class="small text-muted mb-4">Schedule a confidential briefing with lead attorneys in our {{ practice_area.name }} group.</p>
+          <a href="{% url 'firm:contact' %}" class="btn btn-navy w-100">Book a Consultation</a>
+        </div>
+
+        <!-- Practice Leads Card -->
+        <div class="sidebar-widget">
+          <h4 class="widget-title">Practice Group Leadership</h4>
+          <div class="d-flex align-items-center gap-3 mb-3">
+            <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=200" alt="Clara Priestley" class="rounded-circle" width="60" height="60" style="object-fit:cover;">
+            <div>
+              <h5 class="h6 font-serif fw-bold text-navy mb-0">Clara Priestley, Esq.</h5>
+              <span class="extra-small text-gold fw-semibold text-uppercase">Senior Partner</span>
+            </div>
+          </div>
+          <div class="d-flex align-items-center gap-3">
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=200" alt="Marcus Whitfield" class="rounded-circle" width="60" height="60" style="object-fit:cover;">
+            <div>
+              <h5 class="h6 font-serif fw-bold text-navy mb-0">Marcus Whitfield, Esq.</h5>
+              <span class="extra-small text-gold fw-semibold text-uppercase">Partner</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Download Practice Brief -->
+        <div class="sidebar-widget text-white" style="background: linear-gradient(135deg, var(--cp-navy) 0%, var(--cp-navy-light) 100%);">
+          <i class="bi bi-file-earmark-pdf fs-2 text-gold mb-2 d-block"></i>
+          <h4 class="h6 font-serif fw-bold mb-2">Practice Overview PDF</h4>
+          <p class="small text-white-50 mb-3">Download our complete capabilities brief for corporate review.</p>
+          <a href="#" class="btn btn-gold btn-sm w-100"><i class="bi bi-download me-2"></i> Download Overview</a>
+        </div>
+
+      </div>
+    </aside>
+
+  </div>
+</div>
+
+<!-- CONSULTATION CTA -->
+<section class="py-5 text-white" style="background: linear-gradient(135deg, #0B1F3A 0%, #162C4A 100%);">
+  <div class="container py-4 text-center">
+    <span class="text-gold fw-bold text-uppercase tracking-wider small d-block mb-2">Direct Partner Counsel</span>
+    <h2 class="display-5 font-serif fw-bold mb-3">Need Assistance with {{ practice_area.name }}?</h2>
+    <p class="lead text-white-50 col-lg-6 mx-auto mb-4">Our senior legal team is available to evaluate your corporate, regulatory, or dispute requirements.</p>
+    <a href="{% url 'firm:contact' %}" class="btn btn-gold btn-lg px-5 font-serif">Schedule Consultation</a>
+  </div>
+</section>
+{% endblock %}

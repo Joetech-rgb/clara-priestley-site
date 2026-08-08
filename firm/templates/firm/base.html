@@ -1,0 +1,603 @@
+﻿{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Clara Priestley LLP | Legal Excellence. Trusted Advocacy.{% endblock %}</title>
+  <link rel="icon" type="image/png" href="{% static 'firm/img/image3.png' %}">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    :root {
+      --cp-navy: #061527;
+      --cp-navy-light: #0B1F3A;
+      --cp-navy-card: #081B33;
+      --cp-gold: #C9A227;
+      --cp-gold-hover: #B08D1E;
+      --cp-gold-light: #DFBF52;
+      --cp-slate: #64748B;
+      --cp-bg-light: #F8FAFC;
+      --cp-border: #E2E8F0;
+      --cp-shadow: 0 10px 30px rgba(6, 21, 39, 0.05);
+      --cp-shadow-hover: 0 18px 40px rgba(6, 21, 39, 0.1);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: #334155;
+      background-color: #FFFFFF;
+    }
+
+    h1, h2, h3, h4, h5, h6, .font-serif {
+      font-family: 'Playfair Display', serif;
+    }
+
+    /* TOP BAR */
+    .top-bar {
+      background-color: #030C16;
+      color: #94A3B8;
+      font-size: 0.8rem;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .top-bar a {
+      color: #94A3B8;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .top-bar a:hover {
+      color: var(--cp-gold);
+    }
+
+    .top-bar-divider {
+      color: rgba(255, 255, 255, 0.2);
+      margin: 0 10px;
+    }
+
+    /* NAVBAR */
+    .navbar-cp {
+      background-color: var(--cp-navy);
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .navbar-brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border: 2px solid var(--cp-gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      color: var(--cp-gold);
+      font-size: 1.25rem;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .brand-text h1 {
+      color: #FFFFFF;
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin: 0;
+      line-height: 1.1;
+    }
+
+    .brand-text span {
+      color: var(--cp-gold);
+      font-size: 0.62rem;
+      letter-spacing: 2px;
+      display: block;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .nav-link-cp {
+      color: #E2E8F0 !important;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      padding: 8px 14px !important;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link-cp:hover, .nav-link-cp.active {
+      color: var(--cp-gold) !important;
+    }
+
+    /* BUTTONS */
+    .btn-gold-cp {
+      background-color: var(--cp-gold);
+      color: #061527 !important;
+      font-weight: 700;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      padding: 10px 22px;
+      border-radius: 4px;
+      border: none;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-gold-cp:hover {
+      background-color: var(--cp-gold-hover);
+      color: #061527 !important;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(201, 162, 39, 0.3);
+    }
+
+    .btn-outline-cp {
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #FFFFFF !important;
+      font-weight: 600;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      padding: 10px 22px;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-outline-cp:hover {
+      border-color: var(--cp-gold);
+      color: var(--cp-gold) !important;
+      background-color: rgba(201, 162, 39, 0.05);
+    }
+
+    /* FOOTER */
+    .footer-cp {
+      background-color: #030C16;
+      color: #94A3B8;
+      padding-top: 60px;
+      padding-bottom: 25px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.85rem;
+    }
+
+    .footer-title {
+      color: #FFFFFF;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+
+    .footer-links a {
+      color: #94A3B8;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--cp-gold);
+    }
+
+    .social-icon-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      color: #FFFFFF;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-size: 0.85rem;
+    }
+
+    .social-icon-btn:hover {
+      background: var(--cp-gold);
+      color: #061527;
+    }
+
+    .newsletter-input-group {
+      display: flex;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .newsletter-input-group input {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-right: none;
+      color: #FFFFFF;
+      padding: 8px 12px;
+      font-size: 0.82rem;
+      width: 100%;
+    }
+
+    .newsletter-input-group input:focus {
+      outline: none;
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .newsletter-input-group button {
+      background: var(--cp-gold);
+      border: none;
+      color: #061527;
+      padding: 0 16px;
+      transition: background 0.2s ease;
+    }
+
+    .newsletter-input-group button:hover {
+      background: var(--cp-gold-hover);
+    }
+  </style>
+
+  {% block extra_css %}{% endblock %}
+    <style>
+        /* TIMES-NEW-ROMAN-OVERRIDE */
+
+/* ===== MOBILE NAVBAR + TICKER FIXES ===== */
+@media (max-width: 991.98px) {
+  .navbar-cp {
+    position: relative;
+  }
+
+  .navbar-cp .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+  }
+
+  .navbar-toggler {
+    margin-left: auto;
+  }
+
+  /* Float the menu ABOVE the page instead of pushing content down */
+  .navbar-collapse {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--cp-navy, #061527);
+    border-radius: 0 0 8px 8px;
+    padding: 16px;
+    box-shadow: 0 12px 24px rgba(0,0,0,0.3);
+    z-index: 1050;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .navbar-collapse.show,
+  .navbar-collapse.collapsing {
+    max-height: 600px;
+  }
+
+  .navbar-collapse .navbar-nav {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .navbar-collapse .nav-item {
+    width: 100%;
+  }
+
+  .navbar-collapse .nav-link-cp {
+    padding: 10px 8px !important;
+  }
+
+  .ticker-label {
+    font-size: 0.6rem;
+    padding: 0 10px;
+    letter-spacing: 0.5px;
+  }
+
+  .ticker-strip {
+    padding: 10px 0;
+  }
+
+  .ticker-item {
+    font-size: 0.72rem;
+    white-space: nowrap;
+    margin-right: 40px;
+  }
+
+  .ticker-item .ticker-quote {
+    white-space: nowrap;
+  }
+
+  .ticker-dot {
+    margin-right: 40px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .ticker-label span:not(.bi) {
+    display: none;
+  }
+
+  .ticker-label {
+    padding: 0 12px;
+  }
+}
+        * { font-family: "Times New Roman", Times, serif !important; }
+        html { scroll-behavior: smooth; }
+        .whatsapp-float-fixed {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 58px;
+            height: 58px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 1.7rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+            z-index: 999;
+            text-decoration: none;
+        }
+        .whatsapp-float-fixed:hover { color: #ffffff; transform: scale(1.06); }
+    </style>
+</head>
+<body>
+{% if messages %}
+  <div class="container mt-3">
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+
+
+  <!-- TOP UTILITY BAR -->
+  <div class="top-bar d-none d-lg-block">
+    <div class="container d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center">
+        <span><i class="bi bi-telephone-fill text-warning me-2"></i><a href="tel:+16024194360">(602) 419-4360</a></span>
+        <span class="top-bar-divider">|</span>
+        <span><i class="bi bi-envelope-fill text-warning me-2"></i><a href="mailto:priestleyclara65@gmail.com">priestleyclara65@gmail.com</a></span>
+        <span class="top-bar-divider">|</span>
+        <span><i class="bi bi-geo-alt-fill text-warning me-2"></i>2394 E Camelback Rd, Suite 600, Phoenix, AZ 85016</span>
+        <span class="top-bar-divider">|</span>
+        <span><i class="bi bi-clock-fill text-warning me-2"></i>Mon - Fri: 8:00 AM - 6:00 PM</span>
+      </div>
+      <div class="d-flex align-items-center gap-2">
+        <a href="#" class="text-white-50"><i class="bi bi-linkedin"></i></a>
+        <a href="#" class="text-white-50"><i class="bi bi-facebook"></i></a>
+        <a href="#" class="text-white-50"><i class="bi bi-instagram"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN NAVIGATION -->
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-cp sticky-top">
+    <div class="container">
+      <a class="navbar-brand-logo" href="/">
+        <img src="{% static 'firm/img/image3.png' %}" alt="Clara Priestley LLP" class="brand-mark">
+        <div class="brand-text">
+          <h1>CLARA PRIESTLEY</h1>
+          <span>LLP &bull; LEGAL EXCELLENCE. TRUSTED ADVOCACY.</span>
+        </div>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#cpNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="cpNavbar">
+        <ul class="navbar-menu navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+          <li class="nav-item"><a class="nav-link nav-link-cp active" href="/">Home</a></li>
+          <li class="nav-item"><a class="nav-link nav-link-cp" href="{% url 'firm:about' %}">About</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link nav-link-cp dropdown-toggle" href="{% url 'firm:practice_area_list' %}" id="practiceDropdown" role="button" data-bs-toggle="dropdown">Practice Areas</a>
+            <ul class="dropdown-menu dropdown-menu-dark bg-navy">
+              <li><a class="dropdown-item small" href="{% url 'firm:practice_area_list' %}">Corporate Law</a></li>
+              <li><a class="dropdown-item small" href="{% url 'firm:practice_area_list' %}">Family Law</a></li>
+              <li><a class="dropdown-item small" href="{% url 'firm:practice_area_list' %}">Property Law</a></li>
+              <li><a class="dropdown-item small" href="{% url 'firm:practice_area_list' %}">Employment Law</a></li>
+              <li><a class="dropdown-item small" href="{% url 'firm:practice_area_list' %}">Civil Litigation</a></li>
+              <li><a class="dropdown-item small" href="{% url 'firm:practice_area_list' %}">Estate Planning</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link nav-link-cp" href="{% url 'firm:team_list' %}">Attorneys</a></li>
+          
+          <li class="nav-item"><a class="nav-link nav-link-cp" href="{% url 'firm:contact' %}">Contact</a></li>
+        </ul>
+        <div class="ms-lg-3 mt-3 mt-lg-0">
+          <a href="/#consultation" class="btn btn-gold-cp">Book Consultation</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT BLOCK -->
+  {% block content %}{% endblock %}
+
+  <!-- FOOTER -->
+  <footer class="footer-cp">
+    <div class="container">
+      <div class="row g-4 mb-5">
+        
+        <!-- Brand Info -->
+        <div class="col-lg-4">
+          <a class="navbar-brand-logo mb-3 d-inline-flex" href="/">
+            <img src="{% static 'firm/img/image3.png' %}" alt="Clara Priestley LLP" class="brand-mark">
+            <div class="brand-text">
+              <h1>CLARA PRIESTLEY</h1>
+              <span>LLP &bull; LEGAL EXCELLENCE. TRUSTED ADVOCACY.</span>
+            </div>
+          </a>
+          <p class="small text-white-50 mt-3 mb-0" style="max-width: 320px;">
+            Providing high-caliber legal counsel across commercial litigation, corporate governance, estate planning, and asset protection.
+          </p>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="col-6 col-md-3 col-lg-2">
+          <h4 class="footer-title">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="{% url 'firm:about' %}">About Us</a></li>
+            <li><a href="{% url 'firm:practice_area_list' %}">Practice Areas</a></li>
+            <li><a href="{% url 'firm:team_list' %}">Attorneys</a></li>
+            <li><a href="#">Insights</a></li>
+            <li><a href="{% url 'firm:contact' %}">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Practice Areas -->
+        <div class="col-6 col-md-3 col-lg-2">
+          <h4 class="footer-title">Practice Areas</h4>
+          <ul class="footer-links">
+            <li><a href="{% url 'firm:practice_area_list' %}">&bull; Corporate Law</a></li>
+            <li><a href="{% url 'firm:practice_area_list' %}">&bull; Family Law</a></li>
+            <li><a href="{% url 'firm:practice_area_list' %}">&bull; Property Law</a></li>
+            <li><a href="{% url 'firm:practice_area_list' %}">&bull; Employment Law</a></li>
+            <li><a href="{% url 'firm:practice_area_list' %}">&bull; Civil Litigation</a></li>
+            <li><a href="{% url 'firm:practice_area_list' %}">&bull; Estate Planning</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="col-md-6 col-lg-2">
+          <h4 class="footer-title">Contact</h4>
+          <ul class="footer-links small">
+            <li class="d-flex gap-2"><i class="bi bi-telephone-fill text-warning"></i> (602) 419-4360</li>
+            <li class="d-flex gap-2"><i class="bi bi-envelope-fill text-warning"></i> priestleyclara65@gmail.com</li>
+            <li class="d-flex gap-2"><i class="bi bi-geo-alt-fill text-warning"></i> 2394 E Camelback Rd, Suite 600, Phoenix, AZ 85016</li>
+          </ul>
+        </div>
+
+        <!-- Stay Informed Newsletter -->
+        <div class="col-md-6 col-lg-2">
+          <h4 class="footer-title">Stay Informed</h4>
+          <p class="extra-small text-white-50 mb-2">Subscribe for legal insights and firm updates.</p>
+          <div class="newsletter-input-group mb-3">
+            <input type="email" placeholder="Enter your email">
+            <button type="button"><i class="bi bi-arrow-right"></i></button>
+          </div>
+          <div class="d-flex gap-2">
+            <a href="#" class="social-icon-btn"><i class="bi bi-linkedin"></i></a>
+            <a href="#" class="social-icon-btn"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="social-icon-btn"><i class="bi bi-instagram"></i></a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="border-top border-secondary border-opacity-25 pt-3 d-flex flex-column flex-md-row justify-content-between align-items-center extra-small text-white-50">
+        <p class="mb-0">&copy; 2026 Clara Priestley LLP. All rights reserved.</p>
+        <div class="d-flex gap-3 mt-2 mt-md-0">
+          <a href="#" class="text-white-50 text-decoration-none">Privacy Policy</a>
+          <a href="#" class="text-white-50 text-decoration-none">Terms of Service</a>
+          <a href="#" class="text-white-50 text-decoration-none">Disclaimer</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap 5 JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/bootstrap.bundle.min.js"></script>
+
+<script>
+// Manual hamburger toggle - works even if Bootstrap's own
+// collapse JS fails to initialize for any reason
+(function () {
+  var toggler = document.querySelector('[data-bs-target="#cpNavbar"]');
+  var menu = document.getElementById('cpNavbar');
+  if (toggler && menu) {
+    toggler.addEventListener('click', function (e) {
+      menu.classList.toggle('show');
+    });
+    // Close menu when a link inside it is tapped
+    menu.querySelectorAll('a.nav-link-cp, .btn-gold-cp').forEach(function (link) {
+      link.addEventListener('click', function () {
+        menu.classList.remove('show');
+      });
+    });
+  }
+})();
+</script>
+<a href="tel:+16024194360" class="whatsapp-float-fixed" aria-label="Call us"><i class="bi bi-telephone-fill"></i></a>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var counters = document.querySelectorAll('.stat-number[data-target]');
+
+  function easeOutQuad(t) { return t * (2 - t); }
+
+  counters.forEach(function (el) {
+    var rawTarget = el.getAttribute('data-target');
+    var target = parseFloat(rawTarget);
+    var prefix = el.getAttribute('data-prefix') || '';
+    var suffix = el.getAttribute('data-suffix') || '';
+    var decimals = (rawTarget.split('.')[1] || '').length;
+    var duration = 1600;
+    var startTime = null;
+
+    function step(timestamp) {
+      if (!startTime) startTime = timestamp;
+      var progress = Math.min((timestamp - startTime) / duration, 1);
+      var eased = easeOutQuad(progress);
+      var current = target * eased;
+      el.textContent = prefix + current.toFixed(decimals) + suffix;
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        el.textContent = prefix + target.toFixed(decimals) + suffix;
+      }
+    }
+    requestAnimationFrame(step);
+  });
+});
+</script>
+</body>
+</html>
+
+
+
+
+

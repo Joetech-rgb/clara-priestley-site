@@ -1,0 +1,880 @@
+﻿{% extends "firm/base.html" %}
+{% load static %}
+
+{% block title %}Home | Clara Priestley LLP{% endblock %}
+
+{% block extra_css %}
+<style>
+  /* 1. HERO SECTION */
+  .hero-home {
+    background: linear-gradient(90deg, rgba(6, 21, 39, 0.96) 0%, rgba(6, 21, 39, 0.82) 50%, rgba(6, 21, 39, 0.4) 100%),
+                url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80&w=1600') center/cover no-repeat;
+    padding: 120px 0 100px;
+    color: #ffffff;
+    position: relative;
+  }
+
+  .hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 1.25rem;
+  }
+
+  .hero-subtitle {
+    color: #94A3B8;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    max-width: 480px;
+    margin-bottom: 2rem;
+  }
+
+  /* 2. STATS BANNER */
+  .stats-banner {
+    margin-top: -45px;
+    position: relative;
+    z-index: 10;
+  }
+
+  .stat-box {
+    background: var(--cp-navy-card);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 1.5rem 1.25rem;
+    color: #FFFFFF;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    height: 100%;
+  }
+
+  .stat-icon {
+    font-size: 2rem;
+    color: var(--cp-gold);
+    line-height: 1;
+  }
+
+  .stat-number {
+    font-size: 1.8rem;
+    font-weight: 700;
+    font-family: 'Playfair Display', serif;
+    line-height: 1;
+    margin-bottom: 4px;
+    color: #FFFFFF;
+  }
+
+  .stat-label {
+    font-size: 0.72rem;
+    color: #94A3B8;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  /* 3. PRACTICE AREAS SECTION */
+  .section-header {
+    text-align: center;
+    position: relative;
+    margin-bottom: 2.5rem;
+  }
+
+  .section-header h2 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--cp-navy);
+    display: inline-block;
+    padding: 0 15px;
+    background: #FFFFFF;
+    position: relative;
+    z-index: 2;
+  }
+
+  .section-header-line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--cp-border);
+    z-index: 1;
+  }
+
+  .practice-card-grid {
+    background: #ffffff;
+    border: 1px solid var(--cp-border);
+    border-radius: 8px;
+    padding: 1.75rem 1.25rem;
+    text-align: center;
+    box-shadow: var(--cp-shadow);
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .practice-card-grid:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--cp-shadow-hover);
+    border-color: var(--cp-gold);
+  }
+
+  .practice-icon-wrap {
+    font-size: 2.25rem;
+    color: var(--cp-gold);
+    margin-bottom: 1rem;
+    line-height: 1;
+  }
+
+  .practice-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--cp-navy);
+    margin-bottom: 0.5rem;
+  }
+
+  .practice-desc {
+    font-size: 0.82rem;
+    color: var(--cp-slate);
+    line-height: 1.5;
+    margin-bottom: 1.25rem;
+  }
+
+  .practice-arrow {
+    color: var(--cp-gold);
+    font-size: 0.9rem;
+    margin-top: auto;
+    text-decoration: none;
+  }
+
+  /* 3B. TESTIMONIAL NEWS TICKER */
+  .ticker-strip {
+    background: var(--cp-navy);
+    border-top: 1px solid rgba(201, 162, 39, 0.25);
+    border-bottom: 1px solid rgba(201, 162, 39, 0.25);
+    overflow: hidden;
+    position: relative;
+    padding: 14px 0;
+  }
+
+  .ticker-strip::before,
+  .ticker-strip::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 60px;
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  .ticker-strip::before {
+    left: 0;
+    background: linear-gradient(90deg, var(--cp-navy) 0%, transparent 100%);
+  }
+
+  .ticker-strip::after {
+    right: 0;
+    background: linear-gradient(270deg, var(--cp-navy) 0%, transparent 100%);
+  }
+
+  .ticker-label {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    background: var(--cp-gold);
+    color: var(--cp-navy);
+    font-weight: 700;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0 18px;
+    z-index: 4;
+    white-space: nowrap;
+  }
+
+  .ticker-track {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    width: max-content;
+    animation: ticker-scroll 38s linear infinite;
+    padding-left: 100%;
+  }
+
+  .ticker-strip:hover .ticker-track {
+    animation-play-state: paused;
+  }
+
+  @keyframes ticker-scroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+  }
+
+  .ticker-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-right: 60px;
+    color: #E2E8F0;
+    font-size: 0.85rem;
+  }
+
+  .ticker-item .ticker-stars {
+    color: var(--cp-gold);
+    font-size: 0.7rem;
+    white-space: nowrap;
+  }
+
+  .ticker-item .ticker-quote {
+    font-style: italic;
+  }
+
+  .ticker-item .ticker-author {
+    color: var(--cp-gold);
+    font-weight: 600;
+    font-style: normal;
+    white-space: nowrap;
+  }
+
+  .ticker-dot {
+    color: rgba(201, 162, 39, 0.4);
+    margin-right: 60px;
+  }
+
+  /* 4. ABOUT FIRM & WHY CHOOSE US SPLIT */
+  .about-split-section {
+    background: #FFFFFF;
+  }
+
+  .why-choose-card {
+    background: var(--cp-navy);
+    color: #FFFFFF;
+    border-radius: 8px;
+    padding: 2.5rem 2rem;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .why-choose-card::after {
+    content: '';
+    position: absolute;
+    right: -20px;
+    bottom: -20px;
+    width: 150px;
+    height: 150px;
+    background: rgba(201, 162, 39, 0.05);
+    border-radius: 50%;
+  }
+
+  .why-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .why-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .why-icon {
+    color: var(--cp-gold);
+    font-size: 1.5rem;
+    line-height: 1;
+    margin-top: 2px;
+  }
+
+  .why-item h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin-bottom: 2px;
+  }
+
+  .why-item p {
+    font-size: 0.8rem;
+    color: #94A3B8;
+    margin: 0;
+  }
+
+  /* 5. MEET OUR ATTORNEYS & TESTIMONIALS */
+  .attorney-mini-card {
+    background: #FFFFFF;
+    border: 1px solid var(--cp-border);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--cp-shadow);
+    transition: all 0.3s ease;
+  }
+
+  .attorney-mini-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--cp-shadow-hover);
+  }
+
+  .attorney-thumb {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: center 25%;
+    display: block;
+  }
+
+  @media (max-width: 767.98px) {
+    .attorney-thumb {
+      aspect-ratio: 4 / 5;
+      object-position: center 25%;
+    }
+    .attorney-mini-card {
+      margin-bottom: 1rem;
+    }
+  }
+
+  .attorney-details {
+    padding: 1rem;
+  }
+
+  .attorney-name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--cp-navy);
+    margin-bottom: 2px;
+  }
+
+  .attorney-role {
+    font-size: 0.72rem;
+    color: var(--cp-gold);
+    font-weight: 600;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .testimonial-box-clean {
+    background: #F8FAFC;
+    border: 1px solid var(--cp-border);
+    border-radius: 8px;
+    padding: 2.25rem;
+    position: relative;
+  }
+
+  .quote-mark {
+    font-size: 3rem;
+    color: var(--cp-gold);
+    line-height: 1;
+    font-family: 'Playfair Display', serif;
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    opacity: 0.3;
+  }
+
+  /* 6. INSIGHTS & CONSULTATION SECTION */
+  .insight-card {
+    background: #FFFFFF;
+    border: 1px solid var(--cp-border);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--cp-shadow);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .insight-img {
+    height: 150px;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .insight-body {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .insight-date {
+    font-size: 0.7rem;
+    color: var(--cp-slate);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  .insight-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--cp-navy);
+    line-height: 1.35;
+    margin-bottom: 12px;
+  }
+
+  /* REQUEST FORM BOX */
+  .consultation-form-box {
+    background: var(--cp-navy);
+    border-radius: 8px;
+    padding: 2.25rem 2rem;
+    color: #FFFFFF;
+    box-shadow: var(--cp-shadow-hover);
+    border: 1px solid rgba(201, 162, 39, 0.3);
+  }
+
+  .form-control-dark {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+    color: #FFFFFF;
+    padding: 10px 12px;
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+  }
+
+  .form-control-dark:focus {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--cp-gold);
+    color: #FFFFFF;
+    box-shadow: none;
+  }
+
+  .form-control-dark::placeholder {
+    color: #94A3B8;
+  }
+
+  select.form-control-dark option {
+    background-color: var(--cp-navy);
+    color: #FFFFFF;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- 1. HERO SECTION -->
+<section class="hero-home">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-7">
+        <h1 class="hero-title font-serif">Trusted Legal Excellence.<br>Proven Results.</h1>
+        <p class="hero-subtitle">
+          We provide strategic legal solutions with integrity, dedication, and a relentless focus on protecting what matters most to you.
+        </p>
+        <div class="d-flex flex-wrap gap-3">
+          <a href="#consultation" class="btn btn-gold-cp">Schedule Consultation</a>
+          <a href="{% url 'firm:about' %}" class="btn btn-outline-cp">Learn More &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. STATS BANNER -->
+<section class="container stats-banner">
+  <div class="row g-3">
+    <div class="col-6 col-md-3">
+      <div class="stat-box">
+        <div class="stat-icon"><i class="bi bi-briefcase-fill"></i></div>
+        <div>
+          <div class="stat-number" data-target="500" data-suffix="+">0+</div>
+          <p class="stat-label">Successful Cases</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-6 col-md-3">
+      <div class="stat-box">
+        <div class="stat-icon"><i class="bi bi-people-fill"></i></div>
+        <div>
+          <div class="stat-number" data-target="98" data-suffix="%">0%</div>
+          <p class="stat-label">Client Satisfaction</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-6 col-md-3">
+      <div class="stat-box">
+        <div class="stat-icon"><i class="bi bi-award-fill"></i></div>
+        <div>
+          <div class="stat-number" data-target="15" data-suffix="+">0+</div>
+          <p class="stat-label">Years Experience</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-6 col-md-3">
+      <div class="stat-box">
+        <div class="stat-icon"><i class="bi bi-clock-history"></i></div>
+        <div>
+          <div class="stat-number">24/7</div>
+          <p class="stat-label">Legal Support</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. PRACTICE AREAS SECTION -->
+<section class="py-5 my-4">
+  <div class="container">
+    <div class="section-header">
+      <h2>Practice Areas</h2>
+      <div class="section-header-line"></div>
+    </div>
+
+    <div class="row g-4">
+      <!-- Corporate Law -->
+      <div class="col-md-4 col-lg-2">
+        <div class="practice-card-grid">
+          <div class="practice-icon-wrap"><i class="bi bi-bank"></i></div>
+          <h3 class="practice-title font-serif">Corporate Law</h3>
+          <p class="practice-desc">Strategic legal guidance for businesses and corporate growth.</p>
+          <a href="{% url 'firm:practice_area_list' %}" class="practice-arrow"><i class="bi bi-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Family Law -->
+      <div class="col-md-4 col-lg-2">
+        <div class="practice-card-grid">
+          <div class="practice-icon-wrap"><i class="bi bi-people"></i></div>
+          <h3 class="practice-title font-serif">Family Law</h3>
+          <p class="practice-desc">Compassionate solutions for life's most important matters.</p>
+          <a href="{% url 'firm:practice_area_list' %}" class="practice-arrow"><i class="bi bi-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Property Law -->
+      <div class="col-md-4 col-lg-2">
+        <div class="practice-card-grid">
+          <div class="practice-icon-wrap"><i class="bi bi-house-door"></i></div>
+          <h3 class="practice-title font-serif">Property Law</h3>
+          <p class="practice-desc">Protecting your property and real estate investments.</p>
+          <a href="{% url 'firm:practice_area_list' %}" class="practice-arrow"><i class="bi bi-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Employment Law -->
+      <div class="col-md-4 col-lg-2">
+        <div class="practice-card-grid">
+          <div class="practice-icon-wrap"><i class="bi bi-file-earmark-person"></i></div>
+          <h3 class="practice-title font-serif">Employment Law</h3>
+          <p class="practice-desc">Advocating for fair and compliant workplaces.</p>
+          <a href="{% url 'firm:practice_area_list' %}" class="practice-arrow"><i class="bi bi-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Civil Litigation -->
+      <div class="col-md-4 col-lg-2">
+        <div class="practice-card-grid">
+          <div class="practice-icon-wrap"><i class="bi bi-hammer"></i></div>
+          <h3 class="practice-title font-serif">Civil Litigation</h3>
+          <p class="practice-desc">Strong representation in complex disputes.</p>
+          <a href="{% url 'firm:practice_area_list' %}" class="practice-arrow"><i class="bi bi-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Estate Planning -->
+      <div class="col-md-4 col-lg-2">
+        <div class="practice-card-grid">
+          <div class="practice-icon-wrap"><i class="bi bi-journal-text"></i></div>
+          <h3 class="practice-title font-serif">Estate Planning</h3>
+          <p class="practice-desc">Securing your legacy for generations.</p>
+          <a href="{% url 'firm:practice_area_list' %}" class="practice-arrow"><i class="bi bi-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3B. CLIENT TESTIMONIAL NEWS TICKER -->
+<div class="ticker-strip">
+  <span class="ticker-label"><i class="bi bi-chat-quote-fill me-1"></i> What Clients Say</span>
+  <div class="ticker-track">
+    <span class="ticker-item">
+      <span class="ticker-stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></span>
+      <span class="ticker-quote">&ldquo;Went above and beyond to achieve a favorable outcome.&rdquo;</span>
+      <span class="ticker-author">&mdash; Mark T., Business Owner</span>
+    </span>
+    <span class="ticker-dot">&bull;</span>
+    <span class="ticker-item">
+      <span class="ticker-stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></span>
+      <span class="ticker-quote">&ldquo;They took the time to understand what mattered to our family.&rdquo;</span>
+      <span class="ticker-author">&mdash; Renee A., Estate Planning Client</span>
+    </span>
+    <span class="ticker-dot">&bull;</span>
+    <span class="ticker-item">
+      <span class="ticker-stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></span>
+      <span class="ticker-quote">&ldquo;Clear communication at every step, never felt rushed.&rdquo;</span>
+      <span class="ticker-author">&mdash; Daniel O., Startup Founder</span>
+    </span>
+    <span class="ticker-dot">&bull;</span>
+    <span class="ticker-item">
+      <span class="ticker-stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></span>
+      <span class="ticker-quote">&ldquo;Handled our dispute with firmness and care. Result exceeded expectations.&rdquo;</span>
+      <span class="ticker-author">&mdash; Priscilla N., HR Director</span>
+    </span>
+    <span class="ticker-dot">&bull;</span>
+  </div>
+</div>
+
+<!-- 4. ABOUT FIRM & WHY CHOOSE US SPLIT -->
+<section class="py-5 bg-light about-split-section">
+  <div class="container">
+    <div class="row g-4 align-items-stretch">
+      
+      <!-- Left: About Firm -->
+      <div class="col-lg-4">
+        <div class="pe-lg-3 d-flex flex-column justify-content-center h-100">
+          <span class="text-gold fw-bold text-uppercase extra-small tracking-wider mb-2 d-block">About Clara Priestley LLP</span>
+          <h2 class="h2 font-serif fw-bold text-navy mb-3">Legal Solutions.<br>Stronger Futures.</h2>
+          <p class="small text-secondary mb-3 leading-relaxed">
+            Clara Priestley LLP is a Tampa-based law firm committed to delivering exceptional legal services with professionalism, ethics, and a client-first approach. We represent individuals, families, and businesses with dedication and strategic insight to achieve the best possible outcomes.
+          </p>
+          <div>
+            <a href="{% url 'firm:about' %}" class="btn btn-gold-cp btn-sm">About Our Firm &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Middle: Image -->
+      <div class="col-lg-4">
+        <div class="rounded-3 overflow-hidden h-100 shadow-sm">
+          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=800" alt="Tampa Chambers" class="w-100 h-100" style="object-fit: cover;">
+        </div>
+      </div>
+
+      <!-- Right: Why Choose Us -->
+      <div class="col-lg-4">
+        <div class="why-choose-card">
+          <span class="text-warning fw-bold text-uppercase extra-small tracking-wider mb-3 d-block">Why Choose Us</span>
+          
+          <div class="why-item">
+            <div class="why-icon"><i class="bi bi-people-fill"></i></div>
+            <div>
+              <h4 class="font-serif">Experienced Attorneys</h4>
+              <p>Proven record. Trusted expertise.</p>
+            </div>
+          </div>
+
+          <div class="why-item">
+            <div class="why-icon"><i class="bi bi-shield-check"></i></div>
+            <div>
+              <h4 class="font-serif">Integrity You Can Trust</h4>
+              <p>Honesty. Transparency. Always.</p>
+            </div>
+          </div>
+
+          <div class="why-item">
+            <div class="why-icon"><i class="bi bi-trophy-fill"></i></div>
+            <div>
+              <h4 class="font-serif">Results That Matter</h4>
+              <p>Focused on your success.</p>
+            </div>
+          </div>
+
+          <div class="why-item">
+            <div class="why-icon"><i class="bi bi-person-check-fill"></i></div>
+            <div>
+              <h4 class="font-serif">Client-Centered Approach</h4>
+              <p>Committed to your goals.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- 5. MEET OUR ATTORNEYS & CLIENT TESTIMONIALS -->
+<section class="py-5">
+  <div class="container">
+    <div class="row g-5">
+      
+      <!-- Attorneys Left Side -->
+      <div class="col-lg-7">
+        <div class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom">
+          <h3 class="h6 font-serif fw-bold text-navy text-uppercase tracking-wider mb-0">Meet Our Attorneys</h3>
+          <a href="{% url 'firm:team_list' %}" class="extra-small text-gold fw-bold text-decoration-none">View All &rarr;</a>
+        </div>
+
+        <div class="row g-3">
+          <!-- Attorney 1 -->
+          <div class="col-md-4">
+            <div class="attorney-mini-card">
+              <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=400" class="attorney-thumb" alt="Clara Priestley">
+              <div class="attorney-details">
+                <h4 class="attorney-name font-serif">Clara Priestley</h4>
+                <span class="attorney-role">Senior Partner - Corporate and Commercial Law</span>
+                <p class="extra-small text-muted mb-2">We build agreements that hold up long after the handshake.</p>
+                <a href="#" class="text-navy extra-small"><i class="bi bi-linkedin"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Attorney 2 -->
+          <div class="col-md-4">
+            <div class="attorney-mini-card">
+              <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=400" class="attorney-thumb" alt="Marcus Whitfield">
+              <div class="attorney-details">
+                <h4 class="attorney-name font-serif">Marcus Whitfield</h4>
+                <span class="attorney-role">Partner - Litigation and Dispute Resolution</span>
+                <p class="extra-small text-muted mb-2">Preparation wins more cases than eloquence ever will.</p>
+                <a href="#" class="text-navy extra-small"><i class="bi bi-linkedin"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Attorney 3 -->
+          <div class="col-md-4">
+            <div class="attorney-mini-card">
+              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=400" class="attorney-thumb" alt="Naomi Rosenblum">
+              <div class="attorney-details">
+                <h4 class="attorney-name font-serif">Naomi Rosenblum</h4>
+                <span class="attorney-role">Partner - Regulatory and Compliance</span>
+                <p class="extra-small text-muted mb-2">Compliance is how you protect what you have built.</p>
+                <a href="#" class="text-navy extra-small"><i class="bi bi-linkedin"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonials Right Side -->
+      <div class="col-lg-5">
+        <div class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom">
+          <h3 class="h6 font-serif fw-bold text-navy text-uppercase tracking-wider mb-0">Client Testimonials</h3>
+          <div class="d-flex gap-2">
+            <button class="btn btn-sm btn-outline-secondary rounded-circle px-2 py-0"><i class="bi bi-chevron-left"></i></button>
+            <button class="btn btn-sm btn-outline-secondary rounded-circle px-2 py-0"><i class="bi bi-chevron-right"></i></button>
+          </div>
+        </div>
+
+        <div class="testimonial-box-clean h-100 d-flex flex-column justify-content-center">
+          <div class="quote-mark">&ldquo;</div>
+          <p class="fst-italic text-secondary small leading-relaxed mb-4 position-relative" style="z-index: 2;">
+            Clara Priestley LLP went above and beyond to achieve a favorable outcome in a challenging case. Their professionalism and dedication are unmatched.
+          </p>
+          <div class="d-flex align-items-center justify-content-between">
+            <div>
+              <h4 class="h6 font-serif fw-bold text-navy mb-0">&mdash; Mark T.</h4>
+              <span class="extra-small text-muted">Business Owner</span>
+            </div>
+            <div class="text-warning extra-small">
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- 6. LATEST INSIGHTS & CONSULTATION REQUEST -->
+<section id="consultation" class="py-5 bg-light border-top">
+  <div class="container">
+    <div class="row g-5">
+      
+      <!-- Latest Insights Grid (Left Side) -->
+      <div class="col-lg-7">
+        <div class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom">
+          <h3 class="h6 font-serif fw-bold text-navy text-uppercase tracking-wider mb-0">Latest Insights</h3>
+          <a href="#" class="extra-small text-gold fw-bold text-decoration-none">View All Insights &rarr;</a>
+        </div>
+
+        <div class="row g-3">
+          <!-- Article 1 -->
+          <div class="col-md-4">
+            <div class="insight-card">
+              <img src="https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&q=80&w=400" class="insight-img" alt="Corporate Law">
+              <div class="insight-body">
+                <span class="insight-date">MAY 20, 2026</span>
+                <h4 class="insight-title font-serif">Understanding Florida Corporate Law Reforms</h4>
+                <a href="#" class="extra-small text-navy font-serif fw-bold text-decoration-none mt-auto">Read More &rarr;</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Article 2 -->
+          <div class="col-md-4">
+            <div class="insight-card">
+              <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=400" class="insight-img" alt="Estate Planning">
+              <div class="insight-body">
+                <span class="insight-date">MAY 16, 2026</span>
+                <h4 class="insight-title font-serif">Protecting Your Family's Future: Estate Planning Tips</h4>
+                <a href="#" class="extra-small text-navy font-serif fw-bold text-decoration-none mt-auto">Read More &rarr;</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Article 3 -->
+          <div class="col-md-4">
+            <div class="insight-card">
+              <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=400" class="insight-img" alt="Civil Disputes">
+              <div class="insight-body">
+                <span class="insight-date">MAY 12, 2026</span>
+                <h4 class="insight-title font-serif">Strategies for Resolving Civil Disputes Effectively</h4>
+                <a href="#" class="extra-small text-navy font-serif fw-bold text-decoration-none mt-auto">Read More &rarr;</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Need Legal Advice Form (Right Side) -->
+      <div class="col-lg-5">
+        <div class="consultation-form-box">
+          <h3 class="h4 font-serif fw-bold text-white mb-1">NEED LEGAL ADVICE?</h3>
+          <p class="extra-small text-white-50 mb-3">We're here to help. Schedule a consultation and let's protect your interests.</p>
+
+          <form action="{% url 'firm:contact' %}" method="post">
+            {% csrf_token %}
+            <div class="row g-2">
+              <div class="col-md-6">
+                <input type="text" name="name" class="form-control-dark w-100" placeholder="Your Name" required>
+              </div>
+              <div class="col-md-6">
+                <input type="email" name="email" class="form-control-dark w-100" placeholder="Email" required>
+              </div>
+            </div>
+
+            <div class="row g-2">
+              <div class="col-md-6">
+                <input type="tel" name="phone" class="form-control-dark w-100" placeholder="Phone">
+              </div>
+              <div class="col-md-6">
+                <select name="practice_area" class="form-control-dark w-100">
+                  <option value="">Practice Area</option>
+                  <option value="corporate">Corporate Law</option>
+                  <option value="family">Family Law</option>
+                  <option value="property">Property Law</option>
+                  <option value="employment">Employment Law</option>
+                  <option value="litigation">Civil Litigation</option>
+                  <option value="estate">Estate Planning</option>
+                </select>
+              </div>
+            </div>
+
+            <textarea name="message" rows="3" class="form-control-dark w-100" placeholder="How can we help you?" required></textarea>
+
+            <button type="submit" class="btn btn-gold-cp w-100 mt-2">REQUEST CONSULTATION</button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+

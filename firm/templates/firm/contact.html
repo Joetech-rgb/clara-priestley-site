@@ -1,0 +1,376 @@
+﻿{% extends "firm/base.html" %}
+{% load static %}
+
+{% block title %}Contact Us | Clara Priestley LLP{% endblock %}
+
+{% block extra_css %}
+<!-- Google Fonts & FontAwesome / Icons -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+<style>
+  :root {
+    --cp-navy: #0B1F3A;
+    --cp-navy-light: #162C4A;
+    --cp-gold: #C9A227;
+    --cp-gold-hover: #b08d1e;
+    --cp-slate: #5A6A80;
+    --cp-bg-light: #F4F6F9;
+    --cp-border: #E2E8F0;
+    --cp-shadow: 0 20px 40px rgba(11, 31, 58, 0.06);
+    --cp-shadow-hover: 0 25px 50px rgba(11, 31, 58, 0.12);
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    color: #2D3748;
+    background-color: var(--cp-bg-light);
+  }
+
+  h1, h2, h3, h4, h5, h6, .font-serif {
+    font-family: 'Playfair Display', serif;
+  }
+
+  /* Hero Section */
+  .hero-contact {
+    background: linear-gradient(180deg, rgba(11, 31, 58, 0.88) 0%, rgba(11, 31, 58, 0.98) 100%),
+                url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1600') center/cover no-repeat fixed;
+    padding: 140px 0 100px;
+    color: #ffffff;
+    text-align: center;
+  }
+
+  .breadcrumb-item + .breadcrumb-item::before {
+    color: var(--cp-gold);
+  }
+
+  /* Floating Contact Card */
+  .contact-card-floating {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: var(--cp-shadow);
+    padding: 3.5rem;
+    margin-top: -60px;
+    position: relative;
+    z-index: 10;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+  }
+
+  /* Contact Information Side Panel */
+  .contact-info-panel {
+    background: var(--cp-bg-light);
+    border-radius: 12px;
+    padding: 2.25rem;
+    border: 1px solid var(--cp-border);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .contact-info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.2rem;
+    margin-bottom: 2rem;
+  }
+
+  .contact-info-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .contact-icon-wrapper {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    background: rgba(201, 162, 39, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .contact-icon-wrapper i {
+    color: var(--cp-gold);
+    font-size: 1.35rem;
+  }
+
+  .contact-info-item h4 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--cp-gold);
+    margin-bottom: 0.25rem;
+  }
+
+  .contact-info-item p, .contact-info-item a {
+    color: var(--cp-navy);
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 1rem;
+    margin-bottom: 0;
+    transition: color 0.2s ease;
+  }
+
+  .contact-info-item a:hover {
+    color: var(--cp-gold-hover);
+  }
+
+  /* Premium Form Styling */
+  .form-group-custom {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group-custom label {
+    font-weight: 600;
+    color: var(--cp-navy);
+    font-size: 0.88rem;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .form-control-custom {
+    border: 1px solid var(--cp-border);
+    background-color: #FAFAFA;
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 0.98rem;
+    width: 100%;
+    color: #1E293B;
+    transition: all 0.25s ease;
+  }
+
+  .form-control-custom:focus {
+    background-color: #ffffff;
+    border-color: var(--cp-gold);
+    box-shadow: 0 0 0 4px rgba(201, 162, 39, 0.15);
+    outline: none;
+  }
+
+  /* Confidentiality Callout Box */
+  .privilege-box {
+    background: rgba(11, 31, 58, 0.03);
+    border-left: 3px solid var(--cp-navy);
+    border-radius: 0 8px 8px 0;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.75rem;
+  }
+
+  /* Buttons */
+  .btn-gold {
+    background-color: var(--cp-gold);
+    color: #ffffff;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    padding: 14px 36px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+
+  .btn-gold:hover {
+    background-color: var(--cp-gold-hover);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(201, 162, 39, 0.3);
+  }
+
+  /* Map Container Placeholder */
+  .map-wrapper {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--cp-border);
+    height: 180px;
+    background: var(--cp-navy-light);
+    position: relative;
+  }
+
+  @media (max-width: 991.98px) {
+    .contact-card-floating {
+      padding: 2rem 1.5rem;
+      margin-top: -30px;
+    }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- HERO SECTION -->
+<header class="hero-contact">
+  <div class="container">
+    <nav aria-label="breadcrumb" class="d-flex justify-content-center mb-3">
+      <ol class="breadcrumb mb-0 small text-uppercase tracking-wider justify-content-center">
+        <li class="breadcrumb-item"><a href="/" class="text-white-50 text-decoration-none">Home</a></li>
+        <li class="breadcrumb-item active text-gold" aria-current="page">Contact</li>
+      </ol>
+    </nav>
+    <span class="text-gold fw-bold text-uppercase tracking-wider small d-block mb-2">Confidential Consultation</span>
+    <h1 class="display-3 fw-bold font-serif mb-3">Connect With Our Firm</h1>
+    <p class="lead text-white-50 mx-auto col-lg-7 mb-0">
+      Speak directly with senior counsel regarding corporate advisory, litigation, or regulatory inquiries.
+    </p>
+  </div>
+</header>
+
+<!-- MAIN CONTENT CONTAINER -->
+<div class="container pb-5">
+  <div class="contact-card-floating">
+    <div class="row g-5">
+
+      <!-- LEFT SIDEBAR: DIRECT CONTACT & DETAILS -->
+      <div class="col-lg-4">
+        <div class="contact-info-panel">
+          <div>
+            <h3 class="h4 font-serif fw-bold text-navy mb-4">Direct Touchpoints</h3>
+
+            <!-- Phone -->
+            <div class="contact-info-item">
+              <div class="contact-icon-wrapper">
+                <i class="bi bi-telephone-fill"></i>
+              </div>
+              <div>
+                <h4>Telephone</h4>
+                <a href="tel:+16024194360">(602) 419-4360</a>
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="contact-info-item">
+              <div class="contact-icon-wrapper">
+                <i class="bi bi-envelope-fill"></i>
+              </div>
+              <div>
+                <h4>Email Briefings</h4>
+                <a href="mailto:priestleyclara65@gmail.com">priestleyclara65@gmail.com</a>
+              </div>
+            </div>
+
+            <!-- Office Hours -->
+            <div class="contact-info-item">
+              <div class="contact-icon-wrapper">
+                <i class="bi bi-clock-fill"></i>
+              </div>
+              <div>
+                <h4>Operating Hours</h4>
+                <p>Mon &ndash; Fri: 8:00 AM &ndash; 5:00 PM</p>
+              </div>
+            </div>
+
+            <!-- Global Location -->
+            <div class="contact-info-item">
+              <div class="contact-icon-wrapper">
+                <i class="bi bi-geo-alt-fill"></i>
+              </div>
+              <div>
+                <h4>Primary Chambers</h4>
+                <p class="small text-muted">2394 E Camelback Rd, Suite 600, Phoenix, AZ 85016</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Map Preview Placeholder -->
+          <div class="map-wrapper d-flex align-items-center justify-content-center text-center p-3 mt-4">
+            <div>
+              <i class="bi bi-compass text-gold fs-2 mb-1 d-block"></i>
+              <span class="extra-small text-white-50 text-uppercase tracking-wider">Phoenix Chambers Office</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- RIGHT MAIN CONTENT: ENQUIRY FORM -->
+      <div class="col-lg-8">
+        <div class="ps-lg-2">
+          <h3 class="h3 font-serif fw-bold text-navy mb-2">Initiate a Legal Briefing</h3>
+          <p class="text-muted small mb-4">Please submit your details along with a summary of your legal matter. A partner will review your inquiry promptly.</p>
+
+          <form method="post" novalidate>
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+              <div class="alert alert-danger mb-4">
+                {% for error in form.non_field_errors %}
+                  {{ error }}
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            <!-- Check if dynamic form fields exist, otherwise render optimized layout -->
+            {% if form.fields %}
+              <div class="row g-3">
+                {% for field in form %}
+                  <div class="col-12 {% if field.name == 'first_name' or field.name == 'last_name' or field.name == 'email' or field.name == 'phone' %}col-md-6{% endif %} form-group-custom">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                      <div class="text-danger extra-small mt-1">
+                        {{ field.errors|first }}
+                      </div>
+                    {% endif %}
+                  </div>
+                {% endfor %}
+              </div>
+            {% else %}
+              <!-- Native Bootstrap Fallback Form Fields -->
+              <div class="row g-3">
+                <div class="col-md-6 form-group-custom">
+                  <label for="id_full_name">Full Name *</label>
+                  <input type="text" name="full_name" id="id_full_name" class="form-control-custom" placeholder="Your full name" required>
+                </div>
+
+                <div class="col-md-6 form-group-custom">
+                  <label for="id_email">Email Address *</label>
+                  <input type="email" name="email" id="id_email" class="form-control-custom" placeholder="you@yourcompany.com" required>
+                </div>
+
+                <div class="col-md-6 form-group-custom">
+                  <label for="id_phone">Phone Number</label>
+                  <input type="tel" name="phone" id="id_phone" class="form-control-custom" placeholder="e.g. (602) 419-4360">
+                </div>
+
+                <div class="col-md-6 form-group-custom">
+                  <label for="id_practice_area">Relevant Practice Area</label>
+                  <select name="practice_area" id="id_practice_area" class="form-control-custom">
+                    <option value="">Select Practice Group...</option>
+                    <option value="corporate">Corporate & Commercial Law</option>
+                    <option value="litigation">Litigation & Dispute Resolution</option>
+                    <option value="regulatory">Regulatory & Compliance</option>
+                    <option value="real_estate">Real Estate & Asset Advisory</option>
+                    <option value="employment">Employment & Immigration</option>
+                    <option value="ip">Intellectual Property</option>
+                  </select>
+                </div>
+
+                <div class="col-12 form-group-custom">
+                  <label for="id_message">Summary of Legal Requirement *</label>
+                  <textarea name="message" id="id_message" rows="5" class="form-control-custom" placeholder="Tell us a little about your situation and what kind of help you're looking for..." required></textarea>
+                </div>
+              </div>
+            {% endif %}
+
+            <!-- Confidentiality Notice -->
+            <div class="privilege-box d-flex align-items-center gap-3">
+              <i class="bi bi-shield-lock-fill text-navy fs-4"></i>
+              <p class="extra-small text-muted mb-0">
+                <strong>Strict Confidentiality Assured:</strong> Submitting information via this form does not form an attorney-client relationship. All submitted details remain strictly confidential under legal privilege standards.
+              </p>
+            </div>
+
+            <!-- Submit Button -->
+            <button class="btn btn-gold font-serif text-uppercase shadow-sm" type="submit">
+              Submit Inquiry <i class="bi bi-arrow-right ms-2"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+

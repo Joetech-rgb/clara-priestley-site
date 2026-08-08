@@ -1,0 +1,364 @@
+﻿{% extends "firm/base.html" %}
+{% load static %}
+
+{% block title %}About Us | Clara Priestley LLP{% endblock %}
+
+{% block extra_css %}
+<!-- Google Fonts & FontAwesome / Icons -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+<style>
+  :root {
+    --cp-navy: #0B1F3A;
+    --cp-navy-light: #162C4A;
+    --cp-gold: #C9A227;
+    --cp-gold-hover: #b08d1e;
+    --cp-slate: #5A6A80;
+    --cp-bg-light: #F4F6F9;
+    --cp-border: #E2E8F0;
+    --cp-shadow: 0 20px 40px rgba(11, 31, 58, 0.06);
+    --cp-shadow-hover: 0 25px 50px rgba(11, 31, 58, 0.12);
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    color: #2D3748;
+    background-color: var(--cp-bg-light);
+  }
+
+  h1, h2, h3, h4, h5, h6, .font-serif {
+    font-family: 'Playfair Display', serif;
+  }
+
+  /* Hero Section */
+  .hero-about {
+    background: linear-gradient(180deg, rgba(11, 31, 58, 0.88) 0%, rgba(11, 31, 58, 0.98) 100%),
+                url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1600') center/cover no-repeat fixed;
+    padding: 140px 0 90px;
+    color: #ffffff;
+  }
+
+  .breadcrumb-item + .breadcrumb-item::before {
+    color: var(--cp-gold);
+  }
+
+  /* Main Floating Card */
+  .about-card-floating {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: var(--cp-shadow);
+    padding: 3.5rem;
+    margin-top: -50px;
+    position: relative;
+    z-index: 10;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+  }
+
+  /* Stat Counter Card */
+  .stat-card {
+    border-left: 3px solid var(--cp-gold);
+    background: var(--cp-bg-light);
+    border-radius: 0 12px 12px 0;
+    padding: 1.5rem;
+    height: 100%;
+  }
+
+  /* Pillar Card */
+  .pillar-card {
+    background: #ffffff;
+    border: 1px solid var(--cp-border);
+    border-top: 4px solid var(--cp-navy);
+    border-radius: 12px;
+    padding: 2.25rem 1.75rem;
+    height: 100%;
+    transition: all 0.3s ease;
+  }
+
+  .pillar-card:hover {
+    border-top-color: var(--cp-gold);
+    transform: translateY(-5px);
+    box-shadow: var(--cp-shadow-hover);
+  }
+
+  /* Team Card */
+  .team-card {
+    background: #ffffff;
+    border: 1px solid var(--cp-border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--cp-shadow);
+    transition: all 0.3s ease;
+    height: 100%;
+  }
+
+  .team-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--cp-shadow-hover);
+  }
+
+  .team-img {
+    aspect-ratio: 4 / 5;
+    width: 100%;
+    object-fit: cover;
+    object-position: center 25%;
+    display: block;
+    filter: grayscale(20%);
+    transition: filter 0.3s ease;
+  }
+
+  .team-card:hover .team-img {
+    filter: grayscale(0%);
+  }
+
+  /* Buttons */
+  .btn-gold {
+    background-color: var(--cp-gold);
+    color: #ffffff;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 28px;
+    transition: all 0.3s ease;
+  }
+
+  .btn-gold:hover {
+    background-color: var(--cp-gold-hover);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(201, 162, 39, 0.3);
+  }
+
+  .btn-navy {
+    background-color: var(--cp-navy);
+    color: #ffffff;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 28px;
+    transition: all 0.3s ease;
+  }
+
+  .btn-navy:hover {
+    background-color: var(--cp-navy-light);
+    color: #ffffff;
+  }
+
+  @media (max-width: 991.98px) {
+    .about-card-floating {
+      padding: 2rem 1.5rem;
+      margin-top: -30px;
+    }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- HERO SECTION -->
+<header class="hero-about text-center">
+  <div class="container">
+    <nav aria-label="breadcrumb" class="d-flex justify-content-center mb-3">
+      <ol class="breadcrumb mb-0 small text-uppercase tracking-wider">
+        <li class="breadcrumb-item"><a href="/" class="text-white-50 text-decoration-none">Home</a></li>
+        <li class="breadcrumb-item active text-gold" aria-current="page">About Us</li>
+      </ol>
+    </nav>
+    <span class="text-gold text-uppercase tracking-widest fw-bold mb-2 d-block small">Established Integrity & Strategic Advocacy</span>
+    <h1 class="display-3 fw-bold font-serif mx-auto col-lg-10 mb-3">About Clara Priestley LLP</h1>
+    <p class="lead text-white-50 mx-auto col-lg-8 mb-0">
+      A premier law practice dedicated to protecting commercial interests, resolving high-stakes disputes, and delivering cross-border legal excellence.
+    </p>
+  </div>
+</header>
+
+<!-- FIRM NARRATIVE & STATS -->
+<section class="container pb-5">
+  <div class="about-card-floating mb-5">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <span class="text-gold fw-bold text-uppercase small d-block mb-2">Our Firm Heritage</span>
+        <h2 class="h1 font-serif fw-bold text-navy mb-4">Navigating Complexity with Unwavering Vision</h2>
+        <p class="text-secondary leading-relaxed mb-3">
+          Founded on the principles of absolute fiduciary integrity and relentless legal foresight, <strong>Clara Priestley LLP</strong> has established itself as a trusted legal counsel for corporations, financial institutions, and international business entities.
+        </p>
+        <p class="text-secondary leading-relaxed mb-4">
+          Our practice operates across complex commercial transactions, institutional litigation, global immigration frameworks, and strategic regulatory compliance. We do not provide generic advice—we build customized, stress-tested legal roadmaps designed to safeguard your organization's long-term objectives.
+        </p>
+        <div class="p-3 bg-light rounded-3 border-start border-3 border-gold">
+          <p class="fst-italic text-navy mb-0 small">
+            "Legal counsel should not merely react to risk—it must anticipate market dynamics, structure opportunities, and enforce client rights decisively."
+          </p>
+        </div>
+      </div>
+      
+      <div class="col-lg-6">
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="stat-card">
+              <div class="stat-number display-6 fw-bold text-navy font-serif mb-1" style="color: var(--cp-gold) !important;" data-target="2.5" data-prefix="$" data-suffix="B+">$0.0B+</div>
+              <p class="text-muted small text-uppercase mb-0 fw-semibold">Transactions & Settlements</p>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="stat-card">
+              <div class="stat-number display-6 fw-bold font-serif mb-1" style="color: var(--cp-gold) !important;" data-target="25" data-suffix="+">0+</div>
+              <p class="text-muted small text-uppercase mb-0 fw-semibold">Years of Excellence</p>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="stat-card">
+              <div class="stat-number display-6 fw-bold font-serif mb-1" style="color: var(--cp-gold) !important;" data-target="98" data-suffix="%">0%</div>
+              <p class="text-muted small text-uppercase mb-0 fw-semibold">Client Retention</p>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="stat-card">
+              <div class="stat-number display-6 fw-bold font-serif mb-1" style="color: var(--cp-gold) !important;" data-target="120" data-suffix="+">0+</div>
+              <p class="text-muted small text-uppercase mb-0 fw-semibold">Global Corporate Clients</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-4 p-4 rounded-3 text-white" style="background: linear-gradient(135deg, var(--cp-navy) 0%, var(--cp-navy-light) 100%);">
+          <h4 class="h5 font-serif fw-bold mb-2">Need Direct Legal Counsel?</h4>
+          <p class="small text-white-50 mb-3">Schedule a confidential consultation with senior leadership across any of our practice divisions.</p>
+          <a href="{% url 'firm:contact' %}" class="btn btn-gold btn-sm w-100">Schedule Consultation</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GUIDING PILLARS -->
+  <div class="text-center max-w-700 mx-auto my-5">
+    <span class="text-gold fw-bold text-uppercase small d-block mb-2">The Principles That Guide Us</span>
+    <h2 class="h1 font-serif fw-bold text-navy">Our Strategic Pillars</h2>
+  </div>
+
+  <div class="row g-4 mb-5">
+    <div class="col-md-4">
+      <div class="pillar-card">
+        <div class="h2 font-serif fw-bold mb-3" style="color: var(--cp-gold);">01</div>
+        <h3 class="h4 font-serif fw-bold text-navy mb-3">Fiduciary Precision</h3>
+        <p class="text-secondary small mb-0">We treat your operational risks as our own, executing all mandates with complete discretion, financial prudence, and ethical dedication.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="pillar-card">
+        <div class="h2 font-serif fw-bold mb-3" style="color: var(--cp-gold);">02</div>
+        <h3 class="h4 font-serif fw-bold text-navy mb-3">Strategic Foresight</h3>
+        <p class="text-secondary small mb-0">We look beyond immediate litigation to anticipate regulatory shifts and market changes, protecting long-term enterprise value.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="pillar-card">
+        <div class="h2 font-serif fw-bold mb-3" style="color: var(--cp-gold);">03</div>
+        <h3 class="h4 font-serif fw-bold text-navy mb-3">Resolute Advocacy</h3>
+        <p class="text-secondary small mb-0">Whether at the negotiating table or in arbitration, our legal teams bring structured tenacity to protect your rights.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEGAL TEAM SECTION -->
+<section class="py-5 bg-white border-top">
+  <div class="container py-4">
+    <div class="text-center max-w-700 mx-auto mb-5">
+      <span class="text-gold fw-bold text-uppercase small d-block mb-2">Our Esteemed Counsel</span>
+      <h2 class="h1 font-serif fw-bold text-navy">Leadership & Legal Team</h2>
+      <p class="text-muted">Meet the experienced partners and associates steering our corporate, litigation, and regulatory practice groups.</p>
+    </div>
+
+    <div class="row g-4">
+      <!-- 1. Clara Priestley -->
+      <div class="col-md-6 col-lg-4">
+        <div class="team-card">
+          <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=600" class="team-img" alt="Clara Priestley">
+          <div class="p-4">
+            <h3 class="h5 font-serif fw-bold text-navy mb-1">Clara Priestley</h3>
+            <p class="text-gold small fw-bold text-uppercase mb-2">Senior Partner</p>
+            <span class="badge bg-light text-navy border mb-3">Corporate & Commercial Law</span>
+            <p class="text-muted small mb-0">Over 20 years advising multinational conglomerates on M&A, business structuring, and corporate governance.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Marcus Whitfield -->
+      <div class="col-md-6 col-lg-4">
+        <div class="team-card">
+          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=600" class="team-img" alt="Marcus Whitfield">
+          <div class="p-4">
+            <h3 class="h5 font-serif fw-bold text-navy mb-1">Marcus Whitfield</h3>
+            <p class="text-gold small fw-bold text-uppercase mb-2">Partner</p>
+            <span class="badge bg-light text-navy border mb-3">Litigation & Dispute Resolution</span>
+            <p class="text-muted small mb-0">Lead trial counsel for high-stakes commercial disputes, international arbitration, and asset recovery.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Naomi Rosenblum -->
+      <div class="col-md-6 col-lg-4">
+        <div class="team-card">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=600" class="team-img" alt="Naomi Rosenblum">
+          <div class="p-4">
+            <h3 class="h5 font-serif fw-bold text-navy mb-1">Naomi Rosenblum</h3>
+            <p class="text-gold small fw-bold text-uppercase mb-2">Partner</p>
+            <span class="badge bg-light text-navy border mb-3">Regulatory & Compliance</span>
+            <p class="text-muted small mb-0">Specializes in cross-border statutory compliance, anti-trust investigations, and risk assessment.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. David Osei -->
+      <div class="col-md-6 col-lg-4">
+        <div class="team-card">
+          <img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?auto=format&fit=crop&q=80&w=600" class="team-img" alt="David Osei">
+          <div class="p-4">
+            <h3 class="h5 font-serif fw-bold text-navy mb-1">David Osei</h3>
+            <p class="text-gold small fw-bold text-uppercase mb-2">Associate</p>
+            <span class="badge bg-light text-navy border mb-3">Real Estate & Business Law</span>
+            <p class="text-muted small mb-0">Advises institutional investors and corporate clients on commercial real estate acquisitions and business expansion.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Chiamaka Nwosu -->
+      <div class="col-md-6 col-lg-4">
+        <div class="team-card">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=600" class="team-img" alt="Chiamaka Nwosu">
+          <div class="p-4">
+            <h3 class="h5 font-serif fw-bold text-navy mb-1">Chiamaka Nwosu</h3>
+            <p class="text-gold small fw-bold text-uppercase mb-2">Associate</p>
+            <span class="badge bg-light text-navy border mb-3">Employment & Immigration Law</span>
+            <p class="text-muted small mb-0">Focuses on corporate labor compliance, executive employment agreements, and global corporate immigration visas.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. Samuel Kessler -->
+      <div class="col-md-6 col-lg-4">
+        <div class="team-card">
+          <img src="https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?auto=format&fit=crop&q=80&w=600" class="team-img" alt="Samuel Kessler">
+          <div class="p-4">
+            <h3 class="h5 font-serif fw-bold text-navy mb-1">Samuel Kessler</h3>
+            <p class="text-gold small fw-bold text-uppercase mb-2">Associate</p>
+            <span class="badge bg-light text-navy border mb-3">Intellectual Property & Business Law</span>
+            <p class="text-muted small mb-0">Protects proprietary technology, trademarks, and patent rights while counseling startups on business licensing.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONSULTATION CTA -->
+<section class="py-5 text-white" style="background: linear-gradient(135deg, #0B1F3A 0%, #162C4A 100%);">
+  <div class="container py-4 text-center">
+    <span class="text-gold fw-bold text-uppercase tracking-wider small d-block mb-2">Direct Partner Legal Access</span>
+    <h2 class="display-5 font-serif fw-bold mb-3">Partner with Clara Priestley LLP</h2>
+    <p class="lead text-white-50 col-lg-6 mx-auto mb-4">Reach out to our senior legal team for a confidential evaluation of your corporate, dispute, or immigration requirements.</p>
+    <a href="{% url 'firm:contact' %}" class="btn btn-gold btn-lg px-5 font-serif">Book a Consultation</a>
+  </div>
+</section>
+{% endblock %}
