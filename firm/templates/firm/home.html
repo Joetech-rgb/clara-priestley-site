@@ -1,4 +1,4 @@
-﻿{% extends "firm/base.html" %}
+{% extends "firm/base.html" %}
 {% load static %}
 
 {% block title %}Home | Clara Priestley LLP{% endblock %}
@@ -876,5 +876,15 @@
   </div>
 </section>
 
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var docWidth = document.documentElement.clientWidth;
+  document.querySelectorAll('*').forEach(function (el) {
+    if (el.offsetWidth > docWidth) {
+      console.log('OVERFLOW ELEMENT:', el, 'width:', el.offsetWidth, 'vs viewport:', docWidth);
+      el.style.outline = '3px solid red';
+    }
+  });
+});
+</script>
 {% endblock %}
-
