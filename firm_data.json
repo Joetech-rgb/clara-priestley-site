@@ -1,0 +1,490 @@
+[
+{
+  "model": "firm.practicearea",
+  "pk": 1,
+  "fields": {
+    "name": "Corporate Law",
+    "slug": "corporate-law",
+    "summary": "Strategic legal guidance for businesses and corporate growth.",
+    "description": "Our Corporate Law team advises businesses at every stage, from formation and governance to complex commercial agreements. We work closely with founders, boards, and executives to structure deals that protect their interests while positioning them for sustainable growth.",
+    "icon": "",
+    "order": 0
+  }
+},
+{
+  "model": "firm.practicearea",
+  "pk": 2,
+  "fields": {
+    "name": "Family Law",
+    "slug": "family-law",
+    "summary": "Compassionate solutions for life's most important matters.",
+    "description": "Family law matters touch the most personal parts of our clients' lives. We approach divorce, custody, and estate matters with sensitivity, working to protect what matters most while keeping conflict to a minimum wherever possible.",
+    "icon": "",
+    "order": 1
+  }
+},
+{
+  "model": "firm.practicearea",
+  "pk": 3,
+  "fields": {
+    "name": "Property Law",
+    "slug": "property-law",
+    "summary": "Protecting your property and real estate investments.",
+    "description": "Whether you are closing on a home or negotiating a commercial lease, our real estate attorneys handle transactions, title issues, and disputes with the same care they would bring to their own property.",
+    "icon": "",
+    "order": 2
+  }
+},
+{
+  "model": "firm.practicearea",
+  "pk": 4,
+  "fields": {
+    "name": "Employment Law",
+    "slug": "employment-law",
+    "summary": "Advocating for fair and compliant workplaces.",
+    "description": "We advise employers and employees on workplace policy, disputes, and compliance, helping build workplaces where expectations are clear and rights are respected on both sides of the table.",
+    "icon": "",
+    "order": 3
+  }
+},
+{
+  "model": "firm.practicearea",
+  "pk": 5,
+  "fields": {
+    "name": "Civil Litigation",
+    "slug": "civil-litigation",
+    "summary": "Strong representation in complex disputes.",
+    "description": "When disputes arise, our litigation team brings rigorous preparation and courtroom experience to every case. We represent individuals and businesses across commercial and civil disputes, pursuing resolution through negotiation where possible and trial when necessary.",
+    "icon": "",
+    "order": 4
+  }
+},
+{
+  "model": "firm.practicearea",
+  "pk": 6,
+  "fields": {
+    "name": "Estate Planning",
+    "slug": "estate-planning",
+    "summary": "Securing your legacy for generations.",
+    "description": "We help clients plan for the future with wills, trusts, and estate strategies designed to protect their families and preserve what they have built for the next generation.",
+    "icon": "",
+    "order": 5
+  }
+},
+{
+  "model": "firm.contactinquiry",
+  "pk": 1,
+  "fields": {
+    "name": "Ankamah Joseph",
+    "email": "ankamahdxguev74@gmail.com",
+    "phone": "0540191971",
+    "practice_area": null,
+    "message": "oijrejkrjogpo",
+    "status": "new",
+    "created_at": "2026-08-06T12:17:24.768Z"
+  }
+},
+{
+  "model": "firm.contactinquiry",
+  "pk": 2,
+  "fields": {
+    "name": "samuel amponsah",
+    "email": "jupi@gmail.com",
+    "phone": "0249629807",
+    "practice_area": null,
+    "message": ";l;l",
+    "status": "new",
+    "created_at": "2026-08-06T13:31:30.617Z"
+  }
+},
+{
+  "model": "firm.contactinquiry",
+  "pk": 3,
+  "fields": {
+    "name": "samuel Osei Kuffor",
+    "email": "baco2384@gmail.com",
+    "phone": "0249625678",
+    "practice_area": null,
+    "message": "uiyhhiuyougyl",
+    "status": "new",
+    "created_at": "2026-08-06T22:44:39.032Z"
+  }
+},
+{
+  "model": "firm.contactinquiry",
+  "pk": 4,
+  "fields": {
+    "name": "samuel Osei Kuffor",
+    "email": "baco2384@gmail.com",
+    "phone": "0249625678",
+    "practice_area": null,
+    "message": "uiyhhiuyougyl",
+    "status": "new",
+    "created_at": "2026-08-06T22:44:41.314Z"
+  }
+},
+{
+  "model": "firm.contactinquiry",
+  "pk": 5,
+  "fields": {
+    "name": "samuel Osei Kuffor",
+    "email": "baco2384@gmail.com",
+    "phone": "0249625678",
+    "practice_area": null,
+    "message": "uiyhhiuyougyl",
+    "status": "new",
+    "created_at": "2026-08-06T22:44:52.370Z"
+  }
+},
+{
+  "model": "firm.contactinquiry",
+  "pk": 6,
+  "fields": {
+    "name": "samuel Osei Kuffor",
+    "email": "baco2384@gmail.com",
+    "phone": "0249625678",
+    "practice_area": null,
+    "message": "uiyhhiuyougyl",
+    "status": "new",
+    "created_at": "2026-08-06T22:44:53.398Z"
+  }
+},
+{
+  "model": "firm.contactinquiry",
+  "pk": 7,
+  "fields": {
+    "name": "Ankamah Joseph Koah",
+    "email": "ankamahjoseph731@gmail.com",
+    "phone": "+233540191971",
+    "practice_area": 3,
+    "message": "uuplpopopopko",
+    "status": "new",
+    "created_at": "2026-08-06T22:45:18.454Z"
+  }
+},
+{
+  "model": "firm.contactinquiry",
+  "pk": 8,
+  "fields": {
+    "name": "Ankamah Joseph Koah",
+    "email": "ankamahjoseph731@gmail.com",
+    "phone": "+233540191971",
+    "practice_area": 3,
+    "message": "uuplpopopopko",
+    "status": "new",
+    "created_at": "2026-08-06T22:45:22.187Z"
+  }
+},
+{
+  "model": "firm.contactinquiry",
+  "pk": 9,
+  "fields": {
+    "name": "Ankamah Joseph Koah",
+    "email": "ankamahjoseph731@gmail.com",
+    "phone": "+233540191971",
+    "practice_area": 3,
+    "message": "uuplpopopopko",
+    "status": "new",
+    "created_at": "2026-08-06T22:45:29.858Z"
+  }
+},
+{
+  "model": "firm.contactinquiry",
+  "pk": 10,
+  "fields": {
+    "name": "Ankamah Joseph Koah",
+    "email": "ankamahjoseph731@gmail.com",
+    "phone": "+233540191971",
+    "practice_area": 3,
+    "message": "uuplpopopopko",
+    "status": "new",
+    "created_at": "2026-08-06T22:45:30.935Z"
+  }
+},
+{
+  "model": "firm.contactinquiry",
+  "pk": 11,
+  "fields": {
+    "name": "Ankamah Joseph Koah",
+    "email": "ankamahjoseph731@gmail.com",
+    "phone": "+44540191971",
+    "practice_area": 6,
+    "message": "deiiwe",
+    "status": "new",
+    "created_at": "2026-08-06T22:49:10.467Z"
+  }
+},
+{
+  "model": "firm.contactinquiry",
+  "pk": 12,
+  "fields": {
+    "name": "Ankamah Joseph Koah",
+    "email": "ankamahjoseph731@gmail.com",
+    "phone": "+44540191971",
+    "practice_area": 6,
+    "message": "deiiwe",
+    "status": "new",
+    "created_at": "2026-08-06T22:49:14.162Z"
+  }
+},
+{
+  "model": "firm.contactinquiry",
+  "pk": 13,
+  "fields": {
+    "name": "Ankamah Joseph Koah",
+    "email": "ankamahjoseph731@gmail.com",
+    "phone": "+44540191971",
+    "practice_area": 6,
+    "message": "deiiwe",
+    "status": "new",
+    "created_at": "2026-08-06T22:49:15.161Z"
+  }
+},
+{
+  "model": "firm.contactinquiry",
+  "pk": 14,
+  "fields": {
+    "name": "Ankamah Joseph Koah",
+    "email": "ankamahjoseph731@gmail.com",
+    "phone": "+44540191971",
+    "practice_area": 6,
+    "message": "deiiwe",
+    "status": "new",
+    "created_at": "2026-08-06T22:49:16.146Z"
+  }
+},
+{
+  "model": "firm.contactinquiry",
+  "pk": 15,
+  "fields": {
+    "name": "samuel amponsah",
+    "email": "ankamhjoseph731@gmail.com",
+    "phone": "+233540191971",
+    "practice_area": 4,
+    "message": "ref",
+    "status": "new",
+    "created_at": "2026-08-06T23:06:14.020Z"
+  }
+},
+{
+  "model": "firm.contactinquiry",
+  "pk": 16,
+  "fields": {
+    "name": "samuel amponsah",
+    "email": "ankamhjoseph731@gmail.com",
+    "phone": "+233540191971",
+    "practice_area": 4,
+    "message": "ref",
+    "status": "new",
+    "created_at": "2026-08-06T23:06:14.989Z"
+  }
+},
+{
+  "model": "firm.contactinquiry",
+  "pk": 17,
+  "fields": {
+    "name": "samuel amponsah",
+    "email": "ankamhjoseph731@gmail.com",
+    "phone": "+233540191971",
+    "practice_area": 4,
+    "message": "ref",
+    "status": "new",
+    "created_at": "2026-08-06T23:06:15.749Z"
+  }
+},
+{
+  "model": "firm.contactinquiry",
+  "pk": 18,
+  "fields": {
+    "name": "samuel amponsah",
+    "email": "ankamhjoseph731@gmail.com",
+    "phone": "+233540191971",
+    "practice_area": 4,
+    "message": "ref",
+    "status": "new",
+    "created_at": "2026-08-06T23:06:15.902Z"
+  }
+},
+{
+  "model": "firm.contactinquiry",
+  "pk": 19,
+  "fields": {
+    "name": "samuel amponsah",
+    "email": "ankamhjoseph731@gmail.com",
+    "phone": "+233540191971",
+    "practice_area": 4,
+    "message": "ref",
+    "status": "new",
+    "created_at": "2026-08-06T23:06:16.064Z"
+  }
+},
+{
+  "model": "firm.contactinquiry",
+  "pk": 20,
+  "fields": {
+    "name": "samuel amponsah",
+    "email": "ankamhjoseph731@gmail.com",
+    "phone": "+233540191971",
+    "practice_area": 4,
+    "message": "ref",
+    "status": "new",
+    "created_at": "2026-08-06T23:06:16.253Z"
+  }
+},
+{
+  "model": "firm.contactinquiry",
+  "pk": 21,
+  "fields": {
+    "name": "samuel amponsah",
+    "email": "ankamhjoseph731@gmail.com",
+    "phone": "+233540191971",
+    "practice_area": 4,
+    "message": "ref",
+    "status": "new",
+    "created_at": "2026-08-06T23:06:16.850Z"
+  }
+},
+{
+  "model": "firm.contactinquiry",
+  "pk": 22,
+  "fields": {
+    "name": "samuel amponsah",
+    "email": "ankamhjoseph731@gmail.com",
+    "phone": "+233540191971",
+    "practice_area": 4,
+    "message": "ref",
+    "status": "new",
+    "created_at": "2026-08-06T23:06:16.991Z"
+  }
+},
+{
+  "model": "firm.contactinquiry",
+  "pk": 23,
+  "fields": {
+    "name": "samuel amponsah",
+    "email": "ankamhjoseph731@gmail.com",
+    "phone": "+233540191971",
+    "practice_area": 4,
+    "message": "ref",
+    "status": "new",
+    "created_at": "2026-08-06T23:06:17.116Z"
+  }
+},
+{
+  "model": "firm.contactinquiry",
+  "pk": 24,
+  "fields": {
+    "name": "samuel amponsah",
+    "email": "ankamhjoseph731@gmail.com",
+    "phone": "+233540191971",
+    "practice_area": 4,
+    "message": "ref",
+    "status": "new",
+    "created_at": "2026-08-06T23:06:17.320Z"
+  }
+},
+{
+  "model": "firm.contactinquiry",
+  "pk": 25,
+  "fields": {
+    "name": "samuel amponsah",
+    "email": "ankamhjoseph731@gmail.com",
+    "phone": "+233540191971",
+    "practice_area": 4,
+    "message": "ref",
+    "status": "new",
+    "created_at": "2026-08-06T23:06:18.168Z"
+  }
+},
+{
+  "model": "firm.contactinquiry",
+  "pk": 26,
+  "fields": {
+    "name": "Hubert Academy",
+    "email": "ankamahjoseph731@gmail.com",
+    "phone": "0547071659",
+    "practice_area": 2,
+    "message": "reerr",
+    "status": "new",
+    "created_at": "2026-08-06T23:06:38.678Z"
+  }
+},
+{
+  "model": "firm.contactinquiry",
+  "pk": 27,
+  "fields": {
+    "name": "Hubert Academy",
+    "email": "ankamahjoseph731@gmail.com",
+    "phone": "0547071659",
+    "practice_area": 2,
+    "message": "eferferf",
+    "status": "new",
+    "created_at": "2026-08-07T18:20:45.534Z"
+  }
+},
+{
+  "model": "firm.contactinquiry",
+  "pk": 28,
+  "fields": {
+    "name": "Hubert Academy",
+    "email": "ankamahjoseph731@gmail.com",
+    "phone": "0547071659",
+    "practice_area": 2,
+    "message": "eferferf",
+    "status": "new",
+    "created_at": "2026-08-07T18:20:47.635Z"
+  }
+},
+{
+  "model": "firm.contactinquiry",
+  "pk": 29,
+  "fields": {
+    "name": "Hubert Academy",
+    "email": "ankamahjoseph731@gmail.com",
+    "phone": "0547071659",
+    "practice_area": 2,
+    "message": "eferferf",
+    "status": "new",
+    "created_at": "2026-08-07T18:20:48.497Z"
+  }
+},
+{
+  "model": "firm.contactinquiry",
+  "pk": 30,
+  "fields": {
+    "name": "Hubert Academy",
+    "email": "ankamahjoseph731@gmail.com",
+    "phone": "0547071659",
+    "practice_area": 2,
+    "message": "eferferf",
+    "status": "new",
+    "created_at": "2026-08-07T21:13:20.839Z"
+  }
+},
+{
+  "model": "firm.contactinquiry",
+  "pk": 31,
+  "fields": {
+    "name": "Hubert Academy",
+    "email": "ankamahjoseph731@gmail.com",
+    "phone": "0547071659",
+    "practice_area": 2,
+    "message": "eferferf",
+    "status": "new",
+    "created_at": "2026-08-07T21:14:46.738Z"
+  }
+},
+{
+  "model": "firm.contactinquiry",
+  "pk": 32,
+  "fields": {
+    "name": "Hubert Academy",
+    "email": "ankamahjoseph731@gmail.com",
+    "phone": "0547071659",
+    "practice_area": 2,
+    "message": "eferferf",
+    "status": "new",
+    "created_at": "2026-08-07T21:15:04.884Z"
+  }
+}
+]
