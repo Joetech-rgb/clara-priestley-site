@@ -889,21 +889,4 @@
 </section>
 
 
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  var docWidth = document.documentElement.clientWidth;
-  var widest = null, widestWidth = 0;
-  document.querySelectorAll('body *').forEach(function (el) {
-    if (el.scrollWidth > docWidth && el.scrollWidth > widestWidth) {
-      widest = el;
-      widestWidth = el.scrollWidth;
-    }
-  });
-  if (widest) {
-    console.log('WIDEST OVERFLOWING ELEMENT:', widest, 'scrollWidth:', widestWidth, 'viewport:', docWidth, 'classes:', widest.className);
-  } else {
-    console.log('No overflowing element found. Viewport:', docWidth);
-  }
-});
-</script>
 {% endblock %}

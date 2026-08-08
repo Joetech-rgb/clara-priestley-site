@@ -21,6 +21,8 @@
   <style>
     html {
       scroll-behavior: smooth;
+      overflow-x: hidden;
+      overflow-y: visible;
     }
 
     html, body {
@@ -370,6 +372,8 @@
         * { font-family: "Times New Roman", Times, serif !important; }
         html {
       scroll-behavior: smooth;
+      overflow-x: hidden;
+      overflow-y: visible;
     }
 
     html, body {
@@ -549,9 +553,9 @@
       <div class="border-top border-secondary border-opacity-25 pt-3 d-flex flex-column flex-md-row justify-content-between align-items-center extra-small text-white-50">
         <p class="mb-0">&copy; 2026 Clara Priestley LLP. All rights reserved.</p>
         <div class="d-flex gap-3 mt-2 mt-md-0">
-          <a href="#" class="text-white-50 text-decoration-none">Privacy Policy</a>
-          <a href="#" class="text-white-50 text-decoration-none">Terms of Service</a>
-          <a href="#" class="text-white-50 text-decoration-none">Disclaimer</a>
+          <a href="#" class="text-white-50 text-decoration-none" data-bs-toggle="modal" data-bs-target="#privacyModal">Privacy Policy</a>
+          <a href="#" class="text-white-50 text-decoration-none" data-bs-toggle="modal" data-bs-target="#termsModal">Terms of Service</a>
+          <a href="#" class="text-white-50 text-decoration-none" data-bs-toggle="modal" data-bs-target="#disclaimerModal">Disclaimer</a>
         </div>
       </div>
     </div>
@@ -610,6 +614,192 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     requestAnimationFrame(step);
   });
+});
+</script>
+
+<!-- LEGAL MODALS -->
+<style>
+  .legal-modal .modal-content {
+    background: #ffffff;
+    border: none;
+    border-radius: 8px;
+  }
+  .legal-modal .modal-header {
+    background: var(--cp-navy);
+    border-bottom: 3px solid var(--cp-gold);
+    border-radius: 8px 8px 0 0;
+  }
+  .legal-modal .modal-title {
+    color: #ffffff;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+  }
+  .legal-modal .btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%);
+  }
+  .legal-modal .modal-body {
+    color: #334155;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+  .legal-modal .modal-body h6 {
+    color: var(--cp-navy);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    letter-spacing: 0.5px;
+    margin-top: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+  .legal-modal .modal-body h6:first-child {
+    margin-top: 0;
+  }
+  .legal-modal .modal-footer {
+    border-top: 1px solid var(--cp-border);
+  }
+  .legal-modal .modal-footer .btn-gold-cp {
+    border: none;
+  }
+</style>
+
+<!-- Privacy Policy Modal -->
+<div class="modal fade legal-modal" id="privacyModal" tabindex="-1" aria-labelledby="privacyModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="privacyModalLabel"><i class="bi bi-shield-lock-fill text-warning me-2"></i>Privacy Policy</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p class="text-muted small">Last updated: August 2026</p>
+
+        <h6>Information We Collect</h6>
+        <p>When you contact Clara Priestley LLP through our website, we collect the information you voluntarily provide, including your name, email address, phone number, and any details you share about your legal matter. We also automatically collect limited technical information such as browser type and general usage data to help us improve our website.</p>
+
+        <h6>How We Use Your Information</h6>
+        <p>We use the information you provide solely to respond to your inquiry, schedule consultations, and communicate with you about your legal matter. We do not sell, rent, or trade your personal information to third parties for marketing purposes.</p>
+
+        <h6>Attorney-Client Privilege</h6>
+        <p>Submitting an inquiry through this website does not create an attorney-client relationship. Please avoid sharing highly sensitive or confidential details until a formal engagement has been established with our firm.</p>
+
+        <h6>Data Security</h6>
+        <p>We take reasonable technical and organizational measures to protect the information you share with us. However, no method of electronic transmission or storage is completely secure, and we cannot guarantee absolute security.</p>
+
+        <h6>Cookies</h6>
+        <p>Our website may use cookies and similar technologies to support basic site functionality and understand how visitors interact with our pages. You can control cookie preferences through your browser settings.</p>
+
+        <h6>Your Rights</h6>
+        <p>You may request access to, correction of, or deletion of your personal information by contacting us directly at priestleyclara65@gmail.com.</p>
+
+        <h6>Changes to This Policy</h6>
+        <p>We may update this Privacy Policy from time to time. Any changes will be reflected on this page with an updated revision date.</p>
+
+        <h6>Contact Us</h6>
+        <p>If you have questions about this Privacy Policy, please contact us at priestleyclara65@gmail.com or (602) 419-4360.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-gold-cp" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Terms of Service Modal -->
+<div class="modal fade legal-modal" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="termsModalLabel"><i class="bi bi-file-earmark-text-fill text-warning me-2"></i>Terms of Service</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p class="text-muted small">Last updated: August 2026</p>
+
+        <h6>Acceptance of Terms</h6>
+        <p>By accessing and using this website, you agree to be bound by these Terms of Service. If you do not agree with any part of these terms, please discontinue use of this website.</p>
+
+        <h6>No Attorney-Client Relationship</h6>
+        <p>Use of this website, including submitting a contact or consultation request form, does not create an attorney-client relationship between you and Clara Priestley LLP. An attorney-client relationship is only formed through a signed engagement agreement with our firm.</p>
+
+        <h6>Not Legal Advice</h6>
+        <p>The content provided on this website is for general informational purposes only and does not constitute legal advice. You should not act or refrain from acting based on any content on this site without seeking professional legal counsel specific to your situation.</p>
+
+        <h6>Intellectual Property</h6>
+        <p>All content on this website, including text, graphics, logos, and images, is the property of Clara Priestley LLP unless otherwise noted, and may not be reproduced or distributed without prior written permission.</p>
+
+        <h6>Third-Party Links</h6>
+        <p>Our website may contain links to third-party websites. We do not endorse and are not responsible for the content, accuracy, or practices of any linked external sites.</p>
+
+        <h6>Limitation of Liability</h6>
+        <p>Clara Priestley LLP shall not be liable for any direct, indirect, incidental, or consequential damages arising from your use of, or inability to use, this website.</p>
+
+        <h6>Governing Law</h6>
+        <p>These Terms of Service shall be governed by and construed in accordance with the laws of the State of Arizona, without regard to conflict of law principles.</p>
+
+        <h6>Changes to These Terms</h6>
+        <p>We reserve the right to modify these Terms of Service at any time. Continued use of the website after changes are posted constitutes acceptance of the revised terms.</p>
+
+        <h6>Contact Us</h6>
+        <p>Questions about these Terms of Service can be directed to priestleyclara65@gmail.com or (602) 419-4360.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-gold-cp" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Disclaimer Modal -->
+<div class="modal fade legal-modal" id="disclaimerModal" tabindex="-1" aria-labelledby="disclaimerModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="disclaimerModalLabel"><i class="bi bi-exclamation-triangle-fill text-warning me-2"></i>Disclaimer</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h6>No Legal Advice</h6>
+        <p>The information provided on this website is for general informational purposes only and does not, and is not intended to, constitute legal advice. Instead, all information, content, and materials available on this site are for general informational purposes only.</p>
+
+        <h6>No Attorney-Client Relationship</h6>
+        <p>Contacting Clara Priestley LLP through this website, by phone, or by email does not create an attorney-client relationship. An attorney-client relationship is formed only after both parties have signed a formal engagement letter.</p>
+
+        <h6>No Guarantee of Results</h6>
+        <p>Prior results described on this website, including case outcomes and testimonials, do not guarantee or predict a similar result in any future matter undertaken by the firm. Every legal matter is different and outcomes depend on the specific facts and circumstances involved.</p>
+
+        <h6>Jurisdictional Limitations</h6>
+        <p>The attorneys at Clara Priestley LLP are licensed to practice law in specific jurisdictions. This website is not intended to be an advertisement or solicitation for legal services in jurisdictions where our attorneys are not authorized to practice.</p>
+
+        <h6>Confidentiality Notice</h6>
+        <p>Please do not send any confidential or sensitive information through this website's contact forms until an attorney-client relationship has been formally established.</p>
+
+        <h6>Accuracy of Information</h6>
+        <p>While we strive to keep the information on this website accurate and up to date, laws and regulations change frequently. We make no warranties or representations regarding the completeness, accuracy, or timeliness of the content on this site.</p>
+
+        <h6>Contact Us</h6>
+        <p>For questions regarding this Disclaimer, please contact us at priestleyclara65@gmail.com or (602) 419-4360.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-gold-cp" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Force reliable scroll-to-anchor on full page load (fixes cases where
+// browsers don't scroll correctly to #consultation after navigating from another page)
+window.addEventListener('load', function () {
+  if (window.location.hash) {
+    var target = document.querySelector(window.location.hash);
+    if (target) {
+      setTimeout(function () {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    }
+  }
 });
 </script>
 </body>
