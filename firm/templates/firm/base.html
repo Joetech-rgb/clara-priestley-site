@@ -5,6 +5,50 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}Clara Priestley LLP | Legal Excellence. Trusted Advocacy.{% endblock %}</title>
+  <meta name="description" content="{% block meta_description %}Clara Priestley LLP delivers trusted legal counsel in corporate law, family law, property law, employment law, civil litigation, and estate planning. Schedule a consultation today.{% endblock %}">
+  <link rel="canonical" href="{% block canonical_url %}https://clarapriestley.com{{ request.path }}{% endblock %}">
+
+  <!-- Open Graph -->
+  <meta property="og:site_name" content="Clara Priestley LLP">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{% block og_title %}Clara Priestley LLP | Legal Excellence. Trusted Advocacy.{% endblock %}">
+  <meta property="og:description" content="{% block og_description %}Trusted legal counsel across corporate law, family law, property law, employment law, civil litigation, and estate planning.{% endblock %}">
+  <meta property="og:url" content="https://clarapriestley.com{{ request.path }}">
+  <meta property="og:image" content="{% block og_image %}https://clarapriestley.com{% static 'firm/img/image3.png' %}{% endblock %}">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{% block twitter_title %}Clara Priestley LLP{% endblock %}">
+  <meta name="twitter:description" content="{% block twitter_description %}Trusted legal counsel. Proven results.{% endblock %}">
+
+  <!-- Structured Data: LegalService -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LegalService",
+    "name": "Clara Priestley LLP",
+    "image": "https://clarapriestley.com{% static 'firm/img/image3.png' %}",
+    "url": "https://clarapriestley.com",
+    "telephone": "+1-602-419-4360",
+    "email": "priestleyclara65@gmail.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "2394 E Camelback Rd, Suite 600",
+      "addressLocality": "Phoenix",
+      "addressRegion": "AZ",
+      "postalCode": "85016",
+      "addressCountry": "US"
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "08:00",
+      "closes": "18:00"
+    },
+    "priceRange": "$",
+    "areaServed": "Phoenix, AZ"
+  }
+  </script>
   <link rel="icon" type="image/png" href="{% static 'firm/img/image3.png' %}?v=2">
 
   <!-- Google Fonts -->
