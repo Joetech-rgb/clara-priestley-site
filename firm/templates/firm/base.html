@@ -396,7 +396,6 @@
     </style>
 </head>
 <body>
-<div style="overflow-x: hidden; overflow-y: visible; width: 100%;">
 {% if messages %}
   <div class="container mt-3">
     {% for message in messages %}
@@ -469,6 +468,7 @@
       </div>
     </div>
   </nav>
+<div style="overflow-x: hidden; width: 100%;">
 
   <!-- MAIN CONTENT BLOCK -->
   {% block content %}{% endblock %}
