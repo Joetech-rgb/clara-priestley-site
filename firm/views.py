@@ -1,4 +1,4 @@
-﻿from django.conf import settings
+from django.conf import settings
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404, redirect, render
@@ -94,3 +94,13 @@ def contact(request):
     else:
         form = ContactInquiryForm()
     return render(request, "firm/contact.html", {"form": form})
+
+
+def robots_txt(request):
+    from django.http import HttpResponse
+    lines = [
+        "User-agent: *",
+        "Allow: /",
+        "Sitemap: https://clarapriestley.com/sitemap.xml",
+    ]
+    return HttpResponse("\n".join(lines), content_type="text/plain")
