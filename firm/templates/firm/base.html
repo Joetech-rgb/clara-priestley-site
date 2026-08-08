@@ -440,16 +440,36 @@
     </style>
 </head>
 <body>
-{% if messages %}
-  <div class="container mt-3">
+<div id="cp-toast-container" style="position: fixed; top: 90px; left: 50%; transform: translateX(-50%); z-index: 2000; display: flex; flex-direction: column; gap: 10px; align-items: center; pointer-events: none;"></div>
+
+<script>
+function cpShowToast(message, type) {
+  type = type || 'success';
+  var container = document.getElementById('cp-toast-container');
+  if (!container) return;
+  var toast = document.createElement('div');
+  toast.style.cssText = 'pointer-events:auto; min-width:280px; max-width:90vw; background:#0B1F3A; color:#fff; border-left:4px solid ' + (type === 'success' ? '#C9A227' : '#dc3545') + '; border-radius:8px; padding:14px 20px; box-shadow:0 15px 35px rgba(0,0,0,0.25); font-size:0.92rem; opacity:0; transform:translateY(-12px); transition:opacity .3s ease, transform .3s ease;';
+  toast.textContent = message;
+  container.appendChild(toast);
+  requestAnimationFrame(function () {
+    toast.style.opacity = '1';
+    toast.style.transform = 'translateY(0)';
+  });
+  setTimeout(function () {
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateY(-12px)';
+    setTimeout(function () { toast.remove(); }, 300);
+  }, 4000);
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  {% if messages %}
     {% for message in messages %}
-      <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-        {{ message }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-      </div>
+      cpShowToast("{{ message|escapejs }}", "{{ message.tags|default:'success'|escapejs }}");
     {% endfor %}
-  </div>
-{% endif %}
+  {% endif %}
+});
+</script>
 
 
   <!-- TOP UTILITY BAR -->
@@ -563,24 +583,14 @@
         </div>
 
         <!-- Contact Info -->
-        <div class="col-md-6 col-lg-2">
+        <div class="col-md-6 col-lg-4">
           <h4 class="footer-title">Contact</h4>
           <ul class="footer-links small">
             <li class="d-flex gap-2"><i class="bi bi-telephone-fill text-warning"></i> (602) 419-4360</li>
             <li class="d-flex gap-2"><i class="bi bi-envelope-fill text-warning"></i> clarapriestley75@gmail.com</li>
             <li class="d-flex gap-2"><i class="bi bi-geo-alt-fill text-warning"></i> 2394 E Camelback Rd, Suite 600, Phoenix, AZ 85016</li>
           </ul>
-        </div>
-
-        <!-- Stay Informed Newsletter -->
-        <div class="col-md-6 col-lg-2">
-          <h4 class="footer-title">Stay Informed</h4>
-          <p class="extra-small text-white-50 mb-2">Subscribe for legal insights and firm updates.</p>
-          <div class="newsletter-input-group mb-3">
-            <input type="email" placeholder="Enter your email">
-            <button type="button"><i class="bi bi-arrow-right"></i></button>
-          </div>
-          <div class="d-flex gap-2">
+          <div class="d-flex gap-2 mt-3">
             <a href="#" class="social-icon-btn"><i class="bi bi-linkedin"></i></a>
             <a href="#" class="social-icon-btn"><i class="bi bi-facebook"></i></a>
             <a href="#" class="social-icon-btn"><i class="bi bi-instagram"></i></a>

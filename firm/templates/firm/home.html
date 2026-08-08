@@ -849,7 +849,7 @@
           <h3 class="h4 font-serif fw-bold text-white mb-1">NEED LEGAL ADVICE?</h3>
           <p class="extra-small text-white-50 mb-3">We're here to help. Schedule a consultation and let's protect your interests.</p>
 
-          <form action="{% url 'firm:contact' %}" method="post">
+          <form action="{% url 'firm:contact' %}" method="post" id="cp-home-contact-form">
             {% csrf_token %}
             <div class="row g-2">
               <div class="col-md-6">
@@ -881,6 +881,42 @@
 
             <button type="submit" class="btn btn-gold-cp w-100 mt-2">REQUEST CONSULTATION</button>
           </form>
+
+          <script>
+          (function () {
+            var form = document.getElementById('cp-home-contact-form');
+            if (!form) return;
+            form.addEventListener('submit', function (e) {
+              e.preventDefault();
+              var submitBtn = form.querySelector('button[type="submit"]');
+              var originalText = submitBtn.textContent;
+              submitBtn.disabled = true;
+              submitBtn.textContent = 'SENDING...';
+
+              fetch(form.action, {
+                method: 'POST',
+                headers: { 'X-Requested-With': 'XMLHttpRequest' },
+                body: new FormData(form)
+              })
+                .then(function (res) { return res.json().then(function (data) { return { ok: res.ok, data: data }; }); })
+                .then(function (result) {
+                  submitBtn.disabled = false;
+                  submitBtn.textContent = originalText;
+                  if (result.ok && result.data.success) {
+                    cpShowToast(result.data.message || 'Thanks - your enquiry has been received.', 'success');
+                    form.reset();
+                  } else {
+                    cpShowToast('Please check the form and try again.', 'error');
+                  }
+                })
+                .catch(function () {
+                  submitBtn.disabled = false;
+                  submitBtn.textContent = originalText;
+                  cpShowToast('Something went wrong. Please try again.', 'error');
+                });
+            });
+          })();
+          </script>
         </div>
       </div>
 

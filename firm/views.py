@@ -2,6 +2,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404, redirect, render
+from django.http import JsonResponse
 from django.urls import reverse
 
 from .forms import ContactInquiryForm
@@ -55,24 +56,12 @@ def testimonials(request):
 
 
 def contact(request):
+    is_ajax = request.headers.get("x-requested-with") == "XMLHttpRequest"
+
     if request.method == "POST":
         form = ContactInquiryForm(request.POST)
         if form.is_valid():
             inquiry = form.save()
-            send_mail(
-                subject="We've received your enquiry - Clara Priestley LLP",
-                message=(
-                    f"Hi {inquiry.name},\n\n"
-                    "Thank you for reaching out to Clara Priestley LLP. "
-                    "We've received your enquiry and a member of our team will be in touch shortly.\n\n"
-                    "Your message:\n"
-                    f"{inquiry.message}\n\n"
-                    "Clara Priestley LLP"
-                ),
-                from_email=None,
-                recipient_list=[inquiry.email],
-                fail_silently=False,
-            )
 
             send_mail(
                 subject=f"New website enquiry from {inquiry.name}",
@@ -89,8 +78,17 @@ def contact(request):
                 fail_silently=False,
             )
 
-            messages.success(request, "Thanks - your enquiry has been received. Check your email for confirmation.")
+            if is_ajax:
+                return JsonResponse({
+                    "success": True,
+                    "message": "Thanks - your enquiry has been received.",
+                })
+
+            messages.success(request, "Thanks - your enquiry has been received.")
             return redirect(reverse("firm:contact"))
+
+        if is_ajax:
+            return JsonResponse({"success": False, "errors": form.errors}, status=400)
     else:
         form = ContactInquiryForm()
     return render(request, "firm/contact.html", {"form": form})
