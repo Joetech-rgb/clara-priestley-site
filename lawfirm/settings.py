@@ -147,10 +147,10 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'priestleyclara65@gmail.com'
+EMAIL_HOST_USER = 'clarapriestley75@gmail.com'
 EMAIL_HOST_PASSWORD = os.environ.get('FIRM_EMAIL_APP_PASSWORD', '')
-FIRM_NOTIFICATION_EMAIL = 'priestleyclara65@gmail.com'
-DEFAULT_FROM_EMAIL = 'Clara Priestley LLP <priestleyclara65@gmail.com>'
+FIRM_NOTIFICATION_EMAIL = 'clarapriestley75@gmail.com'
+DEFAULT_FROM_EMAIL = 'Clara Priestley LLP <clarapriestley75@gmail.com>'
 
 # --- REAL SMTP (uncomment and fill in once you have an app password) ---
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
